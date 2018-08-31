@@ -1,6 +1,6 @@
 # aymericm.fr
 
-Install dependencies
+## Install dependencies
 
 ```
 yarn
@@ -12,7 +12,7 @@ or
 npm i
 ```
 
-Run dev:
+## Run dev:
 
 ```sh
 yarn start
@@ -24,7 +24,7 @@ or
 npm start
 ```
 
-Make a production build:
+## Make a production build:
 
 ```sh
 yarn build
