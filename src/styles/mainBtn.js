@@ -28,8 +28,8 @@ const ctnr = styled.div`
         width: 100%;
         height: 0;
         background-image: url(${btnHoverBg});
-        background-position: center;
-        background-size: 2000%;
+        background-position: 40%, 50%;
+        background-size: 1200%;
         transition: all 0.2s;
         animation: colorRotate 3s linear infinite;
     }
