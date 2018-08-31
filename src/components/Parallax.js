@@ -18,12 +18,11 @@ export default class Parallax extends Component {
                 spread: -50
             },
             txtCoords: '',
-            bgCoords: '',
-            transition: 'none'
+            bgCoords: ''
         }
     }
 
-    updatePosition(Y, X, smooth) {
+    updatePosition(Y, X) {
         const body = document.getElementsByTagName('body')[0]
         const tconsts = this.state.txtConsts
         const bgconsts = this.state.bgConsts
@@ -61,12 +60,7 @@ export default class Parallax extends Component {
                 )
             `,
             transition: 'all 0.2s ease-out'
-            
         })
-    }
-
-    handleTouch(e) {
-        this.updatePosition(e.changedTouches[0].clientY, e.changedTouches[0].clientX)
     }
         
     handleMouse(e) {
