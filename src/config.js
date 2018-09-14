@@ -16,8 +16,8 @@ const links = [
 const strings = {
     home_title: `Hello World !`,
     home_text_1: `My name is Aymeric Moehn`,
-    home_text_2: `I'm a french student @HETIC and JavaScript freelance developer`,
-    home_text_3: `Also ❤️ visual arts and communication`,
+    home_text_2: `A french student @HETIC and freelance web developer`,
+    home_text_3: `I also ❤️ visual arts`,
     home_stitle: `Check me out here:`
 }
 
