@@ -87,10 +87,10 @@ export default class Parallax extends Component {
                 }}>
                 {this.props.children}</parallax.content>
 
-                <parallax.starbg style={{
+                <parallax.background style={{
                     transform: this.state.bgCoords,
                     transition: this.state.transition
-                }}></parallax.starbg>
+                }}></parallax.background>
             </parallax.container>
         )
     }

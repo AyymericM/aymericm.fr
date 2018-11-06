@@ -8,6 +8,7 @@ const container = styled.div`
 `
 
 const content = styled.div`
+    will-change: transform;
     position: absolute;
     height: 100%;
     width: 100%;
@@ -15,8 +16,9 @@ const content = styled.div`
     left: 0;
     z-index: 2;
 `
-
-const starbg = styled.div`
+    
+const background = styled.div`
+    will-change: transform;
     position: absolute;
     height: 100%;
     width: 100%;
@@ -32,5 +34,5 @@ const starbg = styled.div`
 export {
     container,
     content,
-    starbg
+    background
 }
