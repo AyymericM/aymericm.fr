@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { home as h } from '../styles/index'
 import { MainButton, Parallax, Announcement } from '../components/index'
+import { Projects } from './index'
 import * as cfg from '../config'
 
 export default class Home extends Component {
@@ -10,7 +11,7 @@ export default class Home extends Component {
 				<Announcement />
 				<Parallax>
 					<h.container>
-						<h.title style={{marginBottom: '80px'}}>{cfg.strings.home_title}</h.title>
+						<h.title>{cfg.strings.home_title}</h.title>
 						<h.text>{cfg.strings.home_text_1}</h.text>
 						<h.text>{cfg.strings.home_text_2}</h.text>
 						<h.text>{cfg.strings.home_text_3}</h.text>
@@ -22,6 +23,7 @@ export default class Home extends Component {
 						</h.btnsContainer>
 					</h.container>
 				</Parallax>
+				<Projects />
 			</React.Fragment>
 		)
 	}

@@ -10,6 +10,10 @@ export default class Announcement extends Component {
         }
     }
 
+    closeBox() {
+        this.setState({ showBox: false })
+    }
+
     componentDidMount() {
         setTimeout(() => this.setState({ showBox: true }), 1000)
     }
@@ -18,6 +22,7 @@ export default class Announcement extends Component {
         return (
             <ad.container>
                 <ad.box showBox={this.state.showBox}>
+                    <ad.closebox onClick={() => this.closeBox()}></ad.closebox>
                     <p>{cfg.strings.home_ad_txt}</p>
                     <a href={cfg.strings.home_ad_link} target={'_blank'}>{cfg.strings.home_ad_btn}</a>
                 </ad.box>

@@ -1,7 +1,9 @@
 import styled from 'styled-components'
 
 const container = styled.div`
-    height: 100vh;
+    height: 90vh;
+    padding-top: 40px;
+    box-sizing: border-box;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -20,6 +22,7 @@ const title = styled.h1`
     font-weight: 800;
     font-size: 20px;
     cursor: default;
+    margin-bottom: 40px;
 `
 
 const stitle = styled.h1`
