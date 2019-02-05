@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 import { parallax } from '../styles/index'
 
 export default class Parallax extends Component {
     constructor(props) {
         super(props)
+
+        this.paraCtnr = React.createRef()
+
         this.state = {
             txtConsts: {
                 angle: 1,
@@ -72,15 +76,15 @@ export default class Parallax extends Component {
         this.updatePosition(body.clientHeight/2, body.clientWidth/2)
     }
 
-    componentDidMount() {
-        const body = document.getElementsByTagName('body')[0]
-        body.addEventListener("mousemove", e => this.handleMouse(e));
-        body.addEventListener("mouseleave", () => this.reset());
+    componentDidMount() {     
+        const paraCtnr = ReactDOM.findDOMNode(this.paraCtnr.current)   
+        paraCtnr.addEventListener("mousemove", e => this.handleMouse(e));
+        paraCtnr.addEventListener("mouseleave", () => this.reset());
     }
 
     render() {
         return (
-            <parallax.container>
+            <parallax.container ref={this.paraCtnr}>
                 <parallax.content style={{
                     transform: this.state.txtCoords,
                     transition: this.state.transition

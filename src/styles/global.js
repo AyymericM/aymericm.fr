@@ -15,7 +15,7 @@ injectGlobal`
         color: white;
         background-color: black;
         font-family: 'Cutive Mono', monospace;
-        overflow: hidden;
+        overflow-x: hidden;
     }
 
     a {

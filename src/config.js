@@ -13,6 +13,27 @@ const links = [
     }
 ]
 
+const projects = [
+    {
+        title: 'WarVoices',
+        description: `Listen to fighter's letters accross war history to compare them (school project, in french)`,
+        url: 'http://warvoices.aymericm.fr/',
+        thumb: 'https://aymericm.fr/images/thumbs/warvoices_thumb.jpg'
+    },
+    {
+        title: 'WarVoices',
+        description: `Listen to fighter's letters accross war history to compare them (school project, in french)`,
+        url: 'http://warvoices.aymericm.fr/',
+        thumb: 'https://aymericm.fr/images/thumbs/warvoices_thumb.jpg'
+    },
+    {
+        title: 'WarVoices',
+        description: `Listen to fighter's letters accross war history to compare them (school project, in french)`,
+        url: 'http://warvoices.aymericm.fr/',
+        thumb: 'https://aymericm.fr/images/thumbs/warvoices_thumb.jpg'
+    }
+]
+
 const strings = {
     home_title: `Hello World !`,
     home_text_1: `My name is Aymeric Moehn`,
@@ -26,5 +47,6 @@ const strings = {
 
 export {
     links,
+    projects,
     strings
 }

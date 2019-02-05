@@ -1,10 +1,11 @@
 import styled from 'styled-components'
 import star_bg from '../assets/star_bg_alt.png'
-
+    
 const container = styled.div`
     position: relative;
-    height: 100vh;
+    height: 90vh;
     width: 100%;
+    overflow: hidden;
 `
 
 const content = styled.div`
