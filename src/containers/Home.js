@@ -23,7 +23,7 @@ export default class Home extends Component {
 						</h.btnsContainer>
 					</h.container>
 				</Parallax>
-				<Projects />
+				{/* <Projects /> COMMING SOON */}
 			</React.Fragment>
 		)
 	}
