@@ -1,3 +1,5 @@
+const API_URL = 'https://api.aymericm.fr/sitedata/1/'
+
 const links = [
     {
         url: `https://twitter.com/AyymericM`,
@@ -34,19 +36,27 @@ const projects = [
     }
 ]
 
+const show_tooltip = true
+
+const tooltip = {
+    home_ad_txt: `Hello, I'm available for freelance projets, feel free to contact me !`,
+    home_ad_btn: `See my resumee`,
+    home_ad_link: `https://drive.google.com/open?id=1ginRi23W96E7F3129quRSsBvA7D9P3JZ`
+}
+
 const strings = {
     home_title: `Hello World !`,
     home_text_1: `My name is Aymeric Moehn`,
     home_text_2: `A french student @HETIC and freelance web developer`,
     home_text_3: `I also ❤️ visual arts`,
     home_stitle: `Check me out here:`,
-    home_ad_txt: `Hello, I'm available for freelance projets, feel free to contact me !`,
-    home_ad_btn: `See my resumee`,
-    home_ad_link: `https://drive.google.com/open?id=1ginRi23W96E7F3129quRSsBvA7D9P3JZ`
 }
 
 export {
+    API_URL,
     links,
     projects,
+    show_tooltip,
+    tooltip,
     strings
 }

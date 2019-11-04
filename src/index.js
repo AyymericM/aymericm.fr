@@ -5,6 +5,14 @@ import history from './routes/history'
 import { Router } from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
 import './styles/global'
+import { MainProvider } from './stores/MainStore';
 
-ReactDOM.render(<Router history={history}><Routes /></Router>, document.getElementById('root'));
+ReactDOM.render(
+    <Router history={history}>
+        <MainProvider>
+            <Routes />
+        </MainProvider>
+    </Router>,
+    document.getElementById('root')
+);
 registerServiceWorker();
