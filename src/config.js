@@ -10,7 +10,7 @@ const links = [
         title: `GH`
     },
     {
-        url: `https://www.instagram.com/aymeric_mhn/`,
+        url: `https://www.instagram.com/aym.jpg/`,
         title: `IG`
     }
 ]
@@ -41,7 +41,7 @@ const show_tooltip = true
 const tooltip = {
     home_ad_txt: `Hello, I'm available for freelance projets, feel free to contact me !`,
     home_ad_btn: `See my resumee`,
-    home_ad_link: `https://drive.google.com/open?id=1ginRi23W96E7F3129quRSsBvA7D9P3JZ`
+    home_ad_link: `https://drive.google.com/file/d/10fLTpHwRXXfCUU_aozdZTGNtFCnXNdrq/view?usp=sharing`
 }
 
 const strings = {
