@@ -1,34 +1,15 @@
 import styled from 'styled-components'
 
 const container = styled.div`
-    height: 90vh;
-    padding-top: 40px;
+    height: 100vh;
+    padding: 90px 0 0 90px;
     box-sizing: border-box;
-    width: 100%;
+    margin-right: auto;
+    max-width: 1000px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-`
-
-const btnsContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-`
-
-const title = styled.h1`
-    font-weight: 800;
-    font-size: 20px;
-    cursor: default;
-    margin-bottom: 40px;
-`
-
-const stitle = styled.h1`
-    font-weight: 800;
-    font-size: 14px;
-    cursor: default;
+    justify-content: flex-start;
+    align-items: flex-start;
 `
 
 const text = styled.p`
@@ -41,8 +22,5 @@ const text = styled.p`
 
 export {
     container,
-    btnsContainer,
-    title,
-    stitle,
     text
 }

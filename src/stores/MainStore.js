@@ -16,15 +16,17 @@ export default class MainProvider extends Component {
 
         axios.get(cfg.API_URL).then(res => {
             this.setState({ error: false, data: res.data })
+            console.log(this.state)
         }).catch(e => {
             console.error(e)
             this.setState({ error: true, data: cfg })
+            console.log(this.state)
         })
     }
 
     render() {
         return (
-            <MainContext.Provider value={this.state}>
+            <MainContext.Provider value={this.state.data}>
                 {this.props.children}
             </MainContext.Provider>
         )
