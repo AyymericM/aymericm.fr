@@ -10,7 +10,7 @@ const ctnr = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
-    transition: opacity 200ms ease-out;
+    transition: opacity 300ms ease-out;
     ${props => !props.visible && css`
         opacity: 0;
     `}

@@ -8,6 +8,11 @@ export default class Home extends Component {
     constructor() {
         super()
 
+        this.state = {
+            willBeLoaded: false,
+            loaded: false
+        }
+
         this.regs = {
             reg_url: /(?<=\[URL=")(.*?)(?="\])/,
             reg_txt: /(?<=\])(.*?)(?=\[)/,
@@ -16,6 +21,19 @@ export default class Home extends Component {
         }
 
         this.parseText = this.parseText.bind(this)
+    }
+
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState({
+                willBeLoaded: true
+            })
+        }, 2000)
+        setTimeout(() => {
+            this.setState({
+                loaded: true
+            })
+        }, 2800)
     }
 
     parseText(str) {
@@ -38,24 +56,27 @@ export default class Home extends Component {
 		return (
 			<MainConsummer>
 				{state => (
-					<React.Fragment>
-						<h.container>
-                            {state.home.text.map((text, i) => {
-                                if (text.match(this.regs.reg_url)) {
-                                    const data = this.parseText(text)
+                    !this.state.loaded ?
+                        <h.loadScreen willBeLoaded={this.state.willBeLoaded}>Loading :)</h.loadScreen>
+                    :
+                        <React.Fragment>
+                            <h.container>
+                                {state.home.text.map((text, i) => {
+                                    if (text.match(this.regs.reg_url)) {
+                                        const data = this.parseText(text)
 
-                                    if (data.internal) {
-                                        return <h.text delay={i * 300} key={i}>{data.text_before}<Link to={data.url_link}>{data.url_text}</Link>{data.text_after}</h.text> 
+                                        if (data.internal) {
+                                            return <h.text delay={i * 300} key={i}>{data.text_before}<Link to={data.url_link}>{data.url_text}</Link>{data.text_after}</h.text> 
+                                        } else {
+                                            return <h.text delay={i * 300} key={i}>{data.text_before}<a target={'blank'} href={data.url_link}>{data.url_text}</a>{data.text_after}</h.text>
+                                        }
                                     } else {
-                                        return <h.text delay={i * 300} key={i}>{data.text_before}<a target={'blank'} href={data.url_link}>{data.url_text}</a>{data.text_after}</h.text>
+                                        return <h.text delay={i * 300} key={i}>{text}</h.text>
                                     }
-                                } else {
-                                    return <h.text delay={i * 300} key={i}>{text}</h.text>
-                                }
-                            })}
-						</h.container>
-                        <BottomLinks/>
-					</React.Fragment>
+                                })}
+                            </h.container>
+                            <BottomLinks/>
+                        </React.Fragment>
 				)}
 			</MainConsummer>
 		)

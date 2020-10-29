@@ -40,7 +40,60 @@ const text = styled.p`
     animation-fill-mode: forwards;
 `
 
+const loadAnim = keyframes`
+    from {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    to {
+        opacity: 1;
+    }
+`
+
+const loadAnimEnd = keyframes`
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+`
+
+const loadScreen = styled.div`
+    position: absolute;
+    z-index: 1000;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 500ms ease-out;
+    font-size: 72px;
+    cursor: default;
+    user-select: none;
+    ${props => !props.willBeLoaded && css`
+        animation-name: ${loadAnim};
+        animation-duration: 1000ms;
+        animation-timing-function: ease;
+        animation-iteration-count: infinite;
+    `}
+    ${props => props.willBeLoaded && css`
+        animation-name: ${loadAnimEnd};
+        animation-duration: 600ms;
+        animation-timing-function: ease-out;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+    `}
+`
+
 export {
     container,
-    text
+    text,
+    loadScreen
 }
