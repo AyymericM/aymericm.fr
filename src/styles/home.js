@@ -35,7 +35,7 @@ const text = styled.p`
     animation-name: ${fadeIn};
     animation-delay: ${props => props.delay}ms;
     animation-duration: 600ms;
-    animation-timing-function: ease-out;
+    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
 `

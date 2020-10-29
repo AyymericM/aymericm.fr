@@ -14,7 +14,7 @@ export default class BottomLinks extends Component {
     componentDidMount() {
         setTimeout(() => {
             this.setState({ visible: true })
-        }, 1500)
+        }, 2500)
     }
 
     render() {

@@ -45,12 +45,12 @@ export default class Home extends Component {
                                     const data = this.parseText(text)
 
                                     if (data.internal) {
-                                        return <h.text delay={(i + 1) * 100} key={i}>{data.text_before}<Link to={data.url_link}>{data.url_text}</Link>{data.text_after}</h.text> 
+                                        return <h.text delay={i * 300} key={i}>{data.text_before}<Link to={data.url_link}>{data.url_text}</Link>{data.text_after}</h.text> 
                                     } else {
-                                        return <h.text delay={(i + 1) * 100} key={i}>{data.text_before}<a target={'blank'} href={data.url_link}>{data.url_text}</a>{data.text_after}</h.text>
+                                        return <h.text delay={i * 300} key={i}>{data.text_before}<a target={'blank'} href={data.url_link}>{data.url_text}</a>{data.text_after}</h.text>
                                     }
                                 } else {
-                                    return <h.text delay={(i + 1) * 100} key={i}>{text}</h.text>
+                                    return <h.text delay={i * 300} key={i}>{text}</h.text>
                                 }
                             })}
 						</h.container>
