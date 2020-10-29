@@ -19,6 +19,7 @@ injectGlobal`
         padding: 0;
         width: 100%;
         color: ${colors.black};
+        font-weight: 800;
         background-color: white;
         font-family: 'Avenir Next LT Pro', sans-serif;
         overflow-x: hidden;

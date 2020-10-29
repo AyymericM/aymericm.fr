@@ -1,46 +1,31 @@
-import styled from 'styled-components'
-import btnHoverBg from '../assets/btn-hover-bg.jpg'
+import styled, { css } from 'styled-components'
+import { colors } from './constants'
 
 const ctnr = styled.div`
-    margin: 10px 2px 0 2px;
-    position: relative;
-    padding: 10px 0;
-    box-sizing: border-box;
-    & > a {
-        position: relative;
-        padding: 10px 15px;
-        box-sizing: border-box;
-        color: white;
-        text-decoration: none;
-        text-transform: uppercase;
-        letter-spacing: 0.3rem;
-        font-weight: 800;
-        font-size: 12px;
-    }
-    &:before {
-        position: absolute;
-        z-index: 0;
-        content: '';
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    z-index: 10;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    transition: opacity 200ms ease-out;
+    ${props => !props.visible && css`
         opacity: 0;
-        visibility: visible;
-        top: 50%;
-        left: 0;
-        width: 100%;
-        height: 0;
-        background-image: url(${btnHoverBg});
-        background-position: 40%, 50%;
-        background-size: 1200%;
-        transition: all 0.2s;
-        animation: colorRotate 3s linear infinite;
-    }
-    &:hover:before {
+    `}
+    ${props => props.visible && css`
         opacity: 1;
-        visibility: visible;
-        height: 100%;
-        top: 0;
-    }
+    `}
+`
+
+const txt = styled.a`
+    color: ${colors.blue};
+    font-size: 24px;
+    margin-left: 30px;
 `
 
 export {
-    ctnr
+    ctnr,
+    txt
 }

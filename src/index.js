@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TagManager from 'react-gtm-module'
 import Routes from './routes/main';
-import { Router } from 'react-router-dom';
-import history from './routes/history'
+import { HashRouter } from 'react-router-dom';
 import { MainProvider } from './stores/MainStore';
 import registerServiceWorker from './registerServiceWorker';
 import * as pjson from '../package.json'
@@ -19,11 +18,12 @@ const tagManagerArgs = {
 TagManager.initialize(tagManagerArgs)
 
 ReactDOM.render(
-    <Router history={history}>
+    <HashRouter>
         <MainProvider>
             <Routes />
         </MainProvider>
-    </Router>,
+    </HashRouter>,
     document.getElementById('root')
-);
-registerServiceWorker();
+)
+
+registerServiceWorker()
