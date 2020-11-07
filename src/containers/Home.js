@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { home as h } from '../styles'
+import { home as h, texts as t } from '../styles'
 import { Redirect } from 'react-router-dom'
 import { BottomLinks } from '../components'
 import { MainConsummer } from '../stores/MainStore'
@@ -41,7 +41,7 @@ export default class Home extends Component {
         return data
     }
 
-    redirect(redirect, length) {
+    redirect(redirect, length = 1) {
         this.setState({ willRedirect: true })
 
         setTimeout(() => {
@@ -57,7 +57,7 @@ export default class Home extends Component {
 			<MainConsummer>
 				{state => (
                     !state.loaded ?
-                        <h.loadScreen willBeLoaded={state.willBeLoaded}>Loading :)</h.loadScreen>
+                        <t.loadScreen willBeLoaded={state.willBeLoaded}>Loading :)</t.loadScreen>
                     :
                         <React.Fragment>
                             <React.Fragment>
@@ -69,16 +69,16 @@ export default class Home extends Component {
                                         const data = this.parseText(text)
 
                                         if (data.internal) {
-                                            return <h.text willRedirect={this.state.willRedirect} delay={i * 300} key={i}>{data.text_before}<a href="#" onClick={() => this.redirect(data.url_link, state.data.home.text.length)}>{data.url_text}</a>{data.text_after}</h.text> 
+                                            return <t.main willRedirect={this.state.willRedirect} delay={i * 300} key={i}>{data.text_before}<a onClick={() => this.redirect(data.url_link, state.data.home.text.length)}>{data.url_text}</a>{data.text_after}</t.main> 
                                         } else {
-                                            return <h.text willRedirect={this.state.willRedirect} delay={i * 300} key={i}>{data.text_before}<a target={'blank'} href={data.url_link}>{data.url_text}</a>{data.text_after}</h.text>
+                                            return <t.main willRedirect={this.state.willRedirect} delay={i * 300} key={i}>{data.text_before}<a target={'blank'} href={data.url_link}>{data.url_text}</a>{data.text_after}</t.main>
                                         }
                                     } else {
-                                        return <h.text willRedirect={this.state.willRedirect} delay={i * 300} key={i}>{text}</h.text>
+                                        return <t.main willRedirect={this.state.willRedirect} delay={i * 300} key={i}>{text}</t.main>
                                     }
                                 })}
                             </h.container>
-                            <BottomLinks/>
+                            <BottomLinks willRedirect={this.state.willRedirect}/>
                         </React.Fragment>
 				)}
 			</MainConsummer>

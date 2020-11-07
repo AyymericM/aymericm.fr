@@ -28,5 +28,6 @@ injectGlobal`
     a {
         text-decoration: none;
         color: ${colors.blue};
+        cursor: pointer;
     }
 `

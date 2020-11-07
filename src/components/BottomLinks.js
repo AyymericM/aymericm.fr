@@ -14,14 +14,14 @@ export default class BottomLinks extends Component {
     componentDidMount() {
         setTimeout(() => {
             this.setState({ visible: true })
-        }, 2000)
+        }, 200)
     }
 
     render() {
         return (
             <MainConsummer>
 				{(state) => (
-                    <hlinks.ctnr visible={this.state.visible}>
+                    <hlinks.ctnr visible={this.state.visible && !this.props.willRedirect}>
                         <hlinks.txt target={'_blank'} href={state.data.home.links.mail}>my email</hlinks.txt>
                         <hlinks.txt target={'_blank'} href={state.data.home.links.resumee}>my resume</hlinks.txt>
                     </hlinks.ctnr>
