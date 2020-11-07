@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { home as h } from '../styles'
-import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { BottomLinks } from '../components'
 import { MainConsummer } from '../stores/MainStore'
 
@@ -9,8 +9,9 @@ export default class Home extends Component {
         super()
 
         this.state = {
-            willBeLoaded: false,
-            loaded: false
+            willRedirect: false,
+            redirect: false,
+            redirectURL: '/projects'
         }
 
         this.regs = {
@@ -21,19 +22,7 @@ export default class Home extends Component {
         }
 
         this.parseText = this.parseText.bind(this)
-    }
-
-    componentDidMount() {
-        setTimeout(() => {
-            this.setState({
-                willBeLoaded: true
-            })
-        }, 2000)
-        setTimeout(() => {
-            this.setState({
-                loaded: true
-            })
-        }, 2800)
+        this.redirect = this.redirect.bind(this)
     }
 
     parseText(str) {
@@ -52,26 +41,40 @@ export default class Home extends Component {
         return data
     }
 
+    redirect(redirect, length) {
+        this.setState({ willRedirect: true })
+
+        setTimeout(() => {
+            this.setState({
+                redirect: true,
+                redirectURL: redirect
+            })
+        }, length * 200)
+    }
+
 	render() {
 		return (
 			<MainConsummer>
 				{state => (
-                    !this.state.loaded ?
-                        <h.loadScreen willBeLoaded={this.state.willBeLoaded}>Loading :)</h.loadScreen>
+                    !state.loaded ?
+                        <h.loadScreen willBeLoaded={state.willBeLoaded}>Loading :)</h.loadScreen>
                     :
                         <React.Fragment>
+                            <React.Fragment>
+                                {this.state.redirect ? <Redirect to={this.state.redirectURL} />: null}
+                            </React.Fragment>
                             <h.container>
-                                {state.home.text.map((text, i) => {
+                                {state.data.home.text.map((text, i) => {
                                     if (text.match(this.regs.reg_url)) {
                                         const data = this.parseText(text)
 
                                         if (data.internal) {
-                                            return <h.text delay={i * 300} key={i}>{data.text_before}<Link to={data.url_link}>{data.url_text}</Link>{data.text_after}</h.text> 
+                                            return <h.text willRedirect={this.state.willRedirect} delay={i * 300} key={i}>{data.text_before}<a href="#" onClick={() => this.redirect(data.url_link, state.data.home.text.length)}>{data.url_text}</a>{data.text_after}</h.text> 
                                         } else {
-                                            return <h.text delay={i * 300} key={i}>{data.text_before}<a target={'blank'} href={data.url_link}>{data.url_text}</a>{data.text_after}</h.text>
+                                            return <h.text willRedirect={this.state.willRedirect} delay={i * 300} key={i}>{data.text_before}<a target={'blank'} href={data.url_link}>{data.url_text}</a>{data.text_after}</h.text>
                                         }
                                     } else {
-                                        return <h.text delay={i * 300} key={i}>{text}</h.text>
+                                        return <h.text willRedirect={this.state.willRedirect} delay={i * 300} key={i}>{text}</h.text>
                                     }
                                 })}
                             </h.container>

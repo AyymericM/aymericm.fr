@@ -23,6 +23,20 @@ const fadeIn = keyframes`
     }
 `
 
+const fadeOut = keyframes`
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    50% {
+        opacity: 0;
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-150px);
+    }
+`
+
 const text = styled.p`
     font-weight: 800;
     font-size: 72px;
@@ -32,12 +46,23 @@ const text = styled.p`
     text-align: left;
     opacity: 0;
     transform: translateY(150px);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     animation-name: ${fadeIn};
     animation-delay: ${props => props.delay}ms;
     animation-duration: 600ms;
     animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
+    ${props => props.willRedirect && css`
+        opacity: 1;
+        transform: translateY(0);
+        animation-name: ${fadeOut};
+        animation-delay: ${props => props.delay / 2}ms;
+        animation-duration: 450ms;
+        animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+    `}
 `
 
 const loadAnim = keyframes`
