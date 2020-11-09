@@ -1,9 +1,9 @@
-import { injectGlobal } from 'styled-components'
+import { createGlobalStyle } from 'styled-components'
 import { colors } from './constants'
 import AvenirNextLTPro from '../assets/fonts/AvenirNextLTPro-Demi.otf'
 
 /* eslint no-unused-expressions: 0 */
-injectGlobal`
+const GlobalStyles = createGlobalStyle`
     @font-face {
         font-familly: "Avenir Next LT Pro";
         src: url(${AvenirNextLTPro}) format('truetype');
@@ -31,3 +31,5 @@ injectGlobal`
         cursor: pointer;
     }
 `
+
+export default GlobalStyles
