@@ -22,27 +22,33 @@ export default class MainProvider extends Component {
     }
 
     getDataFromApi() {
+        // TODO: make images lazy load
+
         axios.get(cfg.API_URL).then(res => {
-            this.setState({ error: false, data: res.data })
+            this.setState({
+                willBeLoaded: true,
+                error: false,
+                data: res.data
+            })
+            setTimeout(() => {
+                this.setState({
+                    loaded: true
+                })
+            }, 800)
             console.log('api data', this.state)
         }).catch(e => {
-            this.setState({ error: true, data: cfg })
+            this.setState({
+                willBeLoaded: true,
+                error: true,
+                data: cfg.home
+            })
+            setTimeout(() => {
+                this.setState({
+                    loaded: true
+                })
+            }, 800)
             console.log('backup data', this.state)
-        })
-
-
-        // TODO: replace with real loading
-        setTimeout(() => {
-            console.log('hello');
-            this.setState({
-                willBeLoaded: true
-            })
-        }, 2000)
-        setTimeout(() => {
-            this.setState({
-                loaded: true
-            })
-        }, 2800)
+        })        
     }
 
     render() {

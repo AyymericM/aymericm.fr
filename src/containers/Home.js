@@ -64,12 +64,12 @@ export default class Home extends Component {
                                 {this.state.redirect ? <Redirect to={this.state.redirectURL} />: null}
                             </React.Fragment>
                             <h.container>
-                                {state.data.home.text.map((text, i) => {
+                                {state.data.text.map((text, i) => {
                                     if (text.match(this.regs.reg_url)) {
                                         const data = this.parseText(text)
 
                                         if (data.internal) {
-                                            return <t.main willRedirect={this.state.willRedirect} delay={i * 300} key={i}>{data.text_before}<a onClick={() => this.redirect(data.url_link, state.data.home.text.length)}>{data.url_text}</a>{data.text_after}</t.main> 
+                                            return <t.main willRedirect={this.state.willRedirect} delay={i * 300} key={i}>{data.text_before}<a onClick={() => this.redirect(data.url_link, state.data.text.length)}>{data.url_text}</a>{data.text_after}</t.main> 
                                         } else {
                                             return <t.main willRedirect={this.state.willRedirect} delay={i * 300} key={i}>{data.text_before}<a target={'blank'} href={data.url_link}>{data.url_text}</a>{data.text_after}</t.main>
                                         }
