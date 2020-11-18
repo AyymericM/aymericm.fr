@@ -10,16 +10,19 @@ export default class ProjectItem extends Component {
 
         this.state = {
             top: 0,
-            left: 0
+            left: 0,
+            relTop: 0,
+            relLeft: 0
         }
     }
 
     refreshRef() {
         this.setState({
             top: window.scrollY + this.ref.current.getBoundingClientRect().top,
-            left: window.scrollX + this.ref.current.getBoundingClientRect().left
+            left: window.scrollX + this.ref.current.getBoundingClientRect().left,
+            relTop: window.scrollY,
+            relLeft: window.scrollX
         })
-
     }
 
     componentDidMount() {
