@@ -35,7 +35,7 @@ export default class Projects extends Component {
                 redirect: true,
                 redirectURL: redirect
             })
-        }, length * 200)
+        }, length * 100)
     }
 
 	render() {
