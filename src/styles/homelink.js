@@ -5,7 +5,7 @@ const ctnr = styled.div`
     position: fixed;
     bottom: 50px;
     right: 50px;
-    z-index: 10;
+    z-index: 1000;
     display: flex;
     flex-direction: row;
     align-items: center;

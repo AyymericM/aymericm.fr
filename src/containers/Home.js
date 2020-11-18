@@ -55,9 +55,9 @@ export default class Home extends Component {
 	render() {
 		return (
 			<MainConsummer>
-				{state => (
-                    !state.loaded ?
-                        <t.loadScreen willBeLoaded={state.willBeLoaded}>Loading :)</t.loadScreen>
+				{({state}) => (
+                    !state.ui.loaded ?
+                        <t.loadScreen willBeLoaded={state.ui.willBeLoaded}>Loading :)</t.loadScreen>
                     :
                         <React.Fragment>
                             <React.Fragment>

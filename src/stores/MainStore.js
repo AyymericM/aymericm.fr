@@ -10,15 +10,43 @@ export default class MainProvider extends Component {
         super(props)
 
         this.state = {
-            willBeLoaded: false,
-            loaded: false,
+            ui: {
+                willBeLoaded: false,
+                loaded: false,
+                projects: {
+                    hideMozaic: false,
+                    expandActive: false,
+                    activeProject: -1
+                }
+            },
             error: false,
             data: cfg
-        }      
+        }
+
+        this.actions = {
+            setActiveProject: this.setActiveProject.bind(this)
+        }
     }
 
     componentDidMount() {
         this.getDataFromApi()
+    }
+
+    showUi() {
+        this.setState({
+            ui: {
+                ...this.state.ui,
+                willBeLoaded: true
+            }
+        })
+        setTimeout(() => {
+            this.setState({
+                ui: {
+                    ...this.state.ui,
+                    loaded: true
+                }
+            })
+        }, 800)
     }
 
     getDataFromApi() {
@@ -26,34 +54,77 @@ export default class MainProvider extends Component {
 
         axios.get(cfg.API_URL).then(res => {
             this.setState({
-                willBeLoaded: true,
                 error: false,
                 data: res.data
             })
-            setTimeout(() => {
-                this.setState({
-                    loaded: true
-                })
-            }, 800)
+
+            this.showUi()
+            
             console.log('api data', this.state)
         }).catch(e => {
             this.setState({
-                willBeLoaded: true,
                 error: true,
                 data: cfg.home
             })
-            setTimeout(() => {
-                this.setState({
-                    loaded: true
-                })
-            }, 800)
+            
+            this.showUi()
             console.log('backup data', this.state)
-        })        
+        })
+    }
+
+    setActiveProject(i) {
+        if (i !== this.state.ui.projects.activeProject) {
+            if (i == -1) {
+                this.setState({
+                    ui: {
+                        ...this.state.ui,
+                        projects: {
+                            ...this.state.ui.projects,
+                            expandActive: false
+                        }
+                    }
+                })
+                setTimeout(() => {
+                    this.setState({
+                        ui: {
+                            ...this.state.ui,
+                            projects: {
+                                ...this.state.ui.projects,
+                                activeProject: i,
+                                hideMozaic: false
+                            }
+                        }
+                    })
+                }, 325);
+            } else {
+                this.setState({
+                    ui: {
+                        ...this.state.ui,
+                        projects: {
+                            ...this.state.ui.projects,
+                            hideMozaic: true,
+                            activeProject: i
+                        }
+                    }
+                })
+                setTimeout(() => {
+                    this.setState({
+                        ui: {
+                            ...this.state.ui,
+                            projects: {
+                                ...this.state.ui.projects,
+                                expandActive: true
+                            }
+                        }
+                    })
+                }, 650);
+            }
+        }
     }
 
     render() {
         return (
-            <MainContext.Provider value={this.state}>
+            <MainContext.Provider value={{state: this.state, actions: this.actions}}>
                 {this.props.children}
             </MainContext.Provider>
         )
