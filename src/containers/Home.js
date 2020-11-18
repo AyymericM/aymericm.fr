@@ -49,7 +49,7 @@ export default class Home extends Component {
                 redirect: true,
                 redirectURL: redirect
             })
-        }, length * 200)
+        }, length * 150)
     }
 
 	render() {
