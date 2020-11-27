@@ -30,6 +30,19 @@ const GlobalStyles = createGlobalStyle`
         color: ${colors.blue};
         cursor: pointer;
     }
+
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: white;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: ${colors.blue};
+        border-radius: 2px;
+    }
 `
 
 export default GlobalStyles

@@ -19,18 +19,18 @@ export default class ProjectItem extends Component {
     }
 
     refreshRef() {
-        this.setState({
-            top: window.scrollY + this.ref.current.getBoundingClientRect().top,
-            left: window.scrollX + this.ref.current.getBoundingClientRect().left,
-            relTop: window.scrollY,
-            relLeft: window.scrollX
-        })
+        if ((this.ref.current.getBoundingClientRect().left + this.ref.current.getBoundingClientRect().top) > 0 && this.ref.current != null) {
+            this.setState({
+                top: window.scrollY + this.ref.current.getBoundingClientRect().top,
+                left: window.scrollX + this.ref.current.getBoundingClientRect().left,
+                relTop: window.scrollY,
+                relLeft: window.scrollX
+            })
+        }
     }
 
     componentDidMount() {
         this.refreshRef()
-
-        window.addEventListener('resize', () => this.refreshRef())
     }
 
     render() {
