@@ -26,13 +26,17 @@ const fadeOut = keyframes`
     }
 `
 
-const main = styled.p`
+const textBase = `
     font-weight: 800;
     font-size: 72px;
     line-height: 100px;
     margin: 10px 0;
     cursor: default;
     text-align: left;
+`
+
+const main = styled.p`
+    ${textBase}
     opacity: 0;
     transform: translateY(150px);
     transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -60,6 +64,10 @@ const main = styled.p`
         animation-iteration-count: 1;
         animation-fill-mode: forwards;
     `}
+`
+
+const projectTitle = styled.h1`
+    ${textBase}
 `
 
 const loadAnim = keyframes`
@@ -116,5 +124,6 @@ const loadScreen = styled.div`
 
 export {
     main,
+    projectTitle,
     loadScreen
 }

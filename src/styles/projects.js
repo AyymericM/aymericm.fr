@@ -90,14 +90,18 @@ const container = styled.div`
 
 const content = styled.div`
     position: absolute;
+    cursor: pointer;
     height: 100%;
     width: 100%;
     z-index: 100;
     background: white;
     transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     opacity: 0;
+    z-index: -1;
     ${props => props.active && css`
+        cursor: default;
         opacity: 1;
+        z-index: 100;
     `}
 `
 
@@ -119,6 +123,31 @@ const markdownContainer = styled.div`
     margin: 0 auto;
     padding: 90px;
     max-width: 1100px;
+    cursor: pointer;
+    & * {
+        transition: all 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transform: translateY(50px);
+        opacity: 0;
+        cursor: pointer;
+    }
+    & img {
+        width: 100%;
+        max-height: 30vh;
+        object-fit: cover;
+        object-position: center;
+    }
+    ${props => props.active && css`
+        cursor: default;
+        & * {
+            cursor: default;
+        }
+    `}
+    ${props => props.showContent && css`
+        & * {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    `}
 `
 
 export {

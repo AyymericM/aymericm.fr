@@ -58,7 +58,7 @@ export default class ProjectItem extends Component {
                                 active={this.props.active && state.ui.projects.expandActive}
                                 onClick={() => actions.setActiveProject(-1)}
                             >Close</projects.close>
-                            <ProjectContent data={this.props.data}></ProjectContent>
+                            <ProjectContent active={this.props.active && state.ui.projects.expandActive} data={this.props.data}></ProjectContent>
                         </projects.content>
                     </projects.container>
                 )}
