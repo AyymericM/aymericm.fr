@@ -117,7 +117,7 @@ export default class MainProvider extends Component {
                             }
                         }
                     })
-                }, 650);
+                }, 450);
             }
         }
     }

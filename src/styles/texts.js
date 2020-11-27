@@ -1,4 +1,5 @@
 import styled, { keyframes, css } from 'styled-components'
+import { colors } from './constants'
 
 const fadeIn = keyframes`
     from {
@@ -41,6 +42,14 @@ const main = styled.p`
     animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
+    & a {
+        transition: color 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: ${colors.blue};
+    }
+    & a:hover {
+        color: white;
+    }
     ${props => props.willRedirect && css`
         opacity: 1;
         transform: translateY(0);
