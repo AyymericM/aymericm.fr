@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { MainConsummer } from '../stores/MainStore'
-import { projects } from '../styles'
+import { ProjectContent } from 'components'
+import { MainConsummer } from 'stores'
+import { projects } from 'styles'
+import { API_URL } from 'config'
 
 export default class ProjectItem extends Component {
     constructor() {
@@ -27,6 +29,8 @@ export default class ProjectItem extends Component {
 
     componentDidMount() {
         this.refreshRef()
+
+        window.addEventListener('resize', () => this.refreshRef())
     }
 
     render() {
@@ -35,6 +39,7 @@ export default class ProjectItem extends Component {
                 {({state, actions}) => (
                     <projects.container
                         ref={this.ref}
+                        thumbnail={`${API_URL}${this.props.data.project.thumbnail.url}`}
                         onClick={() => {
                             if (!this.props.active || !state.ui.projects.expandActive) {
                                 this.refreshRef()
@@ -53,8 +58,7 @@ export default class ProjectItem extends Component {
                                 active={this.props.active && state.ui.projects.expandActive}
                                 onClick={() => actions.setActiveProject(-1)}
                             >Close</projects.close>
-                            <div>{this.props.data}</div>
-                            <div>{'is active: ' + this.props.active}</div>
+                            <ProjectContent data={this.props.data}></ProjectContent>
                         </projects.content>
                     </projects.container>
                 )}

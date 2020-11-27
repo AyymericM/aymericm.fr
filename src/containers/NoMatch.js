@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { home as h, texts as t } from '../styles/index'
-import { HomeLink } from '../components/index'
+import { home as h, texts as t } from 'styles'
+import { HomeLink } from 'components'
 
 export default class NoMatch extends Component {
 	render() {

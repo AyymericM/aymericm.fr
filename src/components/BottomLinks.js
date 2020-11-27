@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { MainConsummer } from '../stores/MainStore'
-import { homelink as hlinks } from '../styles'
+import { MainConsummer } from 'stores'
+import { homelink as hlinks } from 'styles'
 
 export default class BottomLinks extends Component {
     constructor() {

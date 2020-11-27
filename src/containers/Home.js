@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { home as h, texts as t } from '../styles'
+import { home as h, texts as t } from 'styles'
 import { Redirect } from 'react-router-dom'
-import { BottomLinks } from '../components'
-import { MainConsummer } from '../stores/MainStore'
+import { BottomLinks } from 'components'
+import { MainConsummer } from 'stores'
 
 export default class Home extends Component {
     constructor() {

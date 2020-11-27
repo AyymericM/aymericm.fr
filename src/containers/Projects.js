@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { home as h, texts as t, projects as p } from '../styles'
 import { Redirect } from 'react-router-dom'
-import { BottomLinks, ProjectItem } from '../components'
-import { MainConsummer } from '../stores/MainStore'
+import { BottomLinks, ProjectItem } from 'components'
+import { MainConsummer } from 'stores'
 
 export default class Projects extends Component {
     constructor() {
@@ -14,15 +14,6 @@ export default class Projects extends Component {
             redirect: false,
             redirectURL: '/'
         }
-
-        this.debugProjects = [
-            '1',
-            '2',
-            '3',
-            '4',
-            '5',
-            '6'
-        ]
 
         this.redirect = this.redirect.bind(this)
     }
@@ -50,10 +41,10 @@ export default class Projects extends Component {
                                 {this.state.redirect ? <Redirect to={this.state.redirectURL} />: null}
                             </React.Fragment>
                             <h.container>
-								<t.main willRedirect={this.state.willRedirect || state.ui.projects.hideMozaic}>Here is my work. You can <br/><a onClick={() => this.redirect('/', this.debugProjects.length)}>go back</a> at any time !</t.main>
+								<t.main willRedirect={this.state.willRedirect || state.ui.projects.hideMozaic}>Here is my work. You can <br/><a onClick={() => this.redirect('/', state.data.projects.length)}>go back</a> at any time !</t.main>
                             </h.container>
                             <p.wrapper>
-                                {this.debugProjects.map((project, i) => {
+                                {state.data.projects.map((project, i) => {
                                     return (
                                         <ProjectItem
                                             key={i}

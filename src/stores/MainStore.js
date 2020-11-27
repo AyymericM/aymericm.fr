@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import * as cfg from '../config'
+import * as cfg from 'config'
 
 const MainContext = React.createContext('Main')
 const MainConsummer = MainContext.Consumer
@@ -52,7 +52,7 @@ export default class MainProvider extends Component {
     getDataFromApi() {
         // TODO: make images lazy load
 
-        axios.get(cfg.API_URL).then(res => {
+        axios.get(`${cfg.API_URL}/data`).then(res => {
             this.setState({
                 error: false,
                 data: res.data

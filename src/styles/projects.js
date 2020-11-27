@@ -51,6 +51,9 @@ const container = styled.div`
     animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
+    background-image: url(${props => props.thumbnail});
+    background-size: cover;
+    background-position: cover;
     ${props => props.willRedirect && css`
         opacity: 1;
         transform: translateY(0);
@@ -90,7 +93,7 @@ const content = styled.div`
     height: 100%;
     width: 100%;
     z-index: 100;
-    background: red;
+    background: white;
     transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     opacity: 0;
     ${props => props.active && css`
@@ -112,9 +115,16 @@ const close = styled.span`
     `}
 `
 
+const markdownContainer = styled.div`
+    margin: 0 auto;
+    padding: 90px;
+    max-width: 1100px;
+`
+
 export {
     wrapper,
     container,
     content,
-    close
+    close,
+    markdownContainer
 }
