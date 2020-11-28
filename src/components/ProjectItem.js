@@ -49,11 +49,15 @@ export default class ProjectItem extends Component {
                         active={this.props.active}
                         expand={this.props.active && state.ui.projects.expandActive}
                         hide={state.ui.projects.hideMozaic && !this.props.active}
+                        disable={(!this.props.active && state.ui.projects.hideMozaic) || (!this.props.active && state.ui.projects.expandActive)}
                         delay={this.props.index * 100}
                         willRedirect={this.props.willRedirect}
                         pos={this.state}
                     >
                         <projects.content active={this.props.active && state.ui.projects.expandActive}>
+                            {this.props.data.project.banner ?
+                                <projects.banner source={`${API_URL}${this.props.data.project.banner.url}`}></projects.banner>
+                            : null}
                             <projects.close
                                 active={this.props.active && state.ui.projects.expandActive}
                                 onClick={() => actions.setActiveProject(-1)}

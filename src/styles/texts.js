@@ -68,6 +68,22 @@ const main = styled.p`
 
 const projectTitle = styled.h1`
     ${textBase}
+    margin-bottom: 120px !important;
+    position: relative;
+    color: transparent;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: ${colors.black};
+    &::before {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        left: -80px;
+        bottom: -60px;
+        height: 1px;
+        width: calc(100% + 160px);
+        background: ${colors.black};
+        opacity: 0.1;
+    }
 `
 
 const loadAnim = keyframes`

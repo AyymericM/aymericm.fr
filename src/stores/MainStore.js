@@ -97,27 +97,29 @@ export default class MainProvider extends Component {
                     })
                 }, 325);
             } else {
-                this.setState({
-                    ui: {
-                        ...this.state.ui,
-                        projects: {
-                            ...this.state.ui.projects,
-                            hideMozaic: true,
-                            activeProject: i
-                        }
-                    }
-                })
-                setTimeout(() => {
+                if (!this.state.ui.projects.expandActive) {     
                     this.setState({
                         ui: {
                             ...this.state.ui,
                             projects: {
                                 ...this.state.ui.projects,
-                                expandActive: true
+                                hideMozaic: true,
+                                activeProject: i
                             }
                         }
                     })
-                }, 450);
+                    setTimeout(() => {
+                        this.setState({
+                            ui: {
+                                ...this.state.ui,
+                                projects: {
+                                    ...this.state.ui.projects,
+                                    expandActive: true
+                                }
+                            }
+                        })
+                    }, 450);
+                }
             }
         }
     }

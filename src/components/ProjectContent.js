@@ -15,7 +15,7 @@ export default class ProjectContent extends Component {
     }
 
     componentDidUpdate() {
-        console.log("is active: ", this.props.active)
+        console.log("ID: ", this.project.id, "is active: ", this.props.active)
 
         if (this.props.active != this.state.showContent) {
             if (this.props.active) {
@@ -30,7 +30,7 @@ export default class ProjectContent extends Component {
 
     render() {
         return (
-            <projects.markdownContainer active={this.props.active} showContent={this.state.showContent}>
+            <projects.markdownContainer active={this.props.active} showContent={this.state.showContent} useMargin={this.project.banner}>
                 <texts.projectTitle>{this.project.name}</texts.projectTitle>
                 <ReactMarkdown transformImageUri={uri => `${API_URL}${uri}`} source={this.project.content}/>
             </projects.markdownContainer>
