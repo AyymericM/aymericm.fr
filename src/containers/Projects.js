@@ -4,10 +4,6 @@ import { ProjectItem } from '../components'
 import { projects } from '../styles'
 
 export default class Projects extends Component {
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         return (
             <projects.wrapper>
