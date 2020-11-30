@@ -1,6 +1,6 @@
 {
   "name": "aymericm.fr",
-  "version": "1.0.1",
+  "version": "2021.0.1",
   "private": true,
   "dependencies": {
     "axios": "^0.21.0",

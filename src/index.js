@@ -7,12 +7,17 @@ import { MainProvider } from 'stores';
 import registerServiceWorker from './registerServiceWorker';
 import * as pjson from '../package.json'
 import GlobalStyles from './styles/global'
+import packageJSON from '../package.json'
 
 const tagManagerArgs = {
     gtmId: 'GTM-MZQTPRC',
     dataLayer: {
         version: pjson.version
     }
+}
+
+window.version = () => {
+    console.log(packageJSON.version)
 }
  
 TagManager.initialize(tagManagerArgs)
