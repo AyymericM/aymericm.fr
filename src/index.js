@@ -18,6 +18,10 @@ const tagManagerArgs = {
  
 TagManager.initialize(tagManagerArgs)
 
+window.version = () => {
+    console.log(pjson.version)
+}
+
 ReactDOM.render(
     <Router history={history}>
         <MainProvider>
