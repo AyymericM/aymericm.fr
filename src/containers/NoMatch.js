@@ -7,7 +7,6 @@ export default class NoMatch extends Component {
 		return (
 			<h.container>
 				<t.main>{'404'}</t.main>
-				<HomeLink linkUrl={'/'} linkTitle={'Go home'} />
 			</h.container>
 		)
 	}

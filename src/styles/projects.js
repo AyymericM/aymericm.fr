@@ -111,16 +111,39 @@ const content = styled.div`
 const close = styled.span`
     position: fixed;
     z-index: 200;
-    right: 20px;
-    top: 20px;
-    font-size: 24px;
-    color: ${colors.blue};
+    right: 35px;
+    top: 25px;
     opacity: 0;
     transition: opacity 0.2s ease;
+    cursor: pointer;
+    font-size: 24px;
+    color: ${colors.blue};
     cursor: pointer;
     ${props => props.active && css`
         opacity: 1;
     `}
+`
+
+const header = styled.div`
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0 0 30px 0;
+    margin-bottom: 120px !important;
+    &::before {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        left: -80px;
+        bottom: -60px;
+        height: 1px;
+        width: calc(100% + 160px);
+        background: ${colors.black};
+        opacity: 0.1;
+    }
 `
 
 const markdownContainer = styled.div`
@@ -203,7 +226,7 @@ const banner = styled.div`
         width: 100%;
         height: 100%;
         background-color: black;
-        opacity: 0.65;
+        opacity: 0.80;
     }
 `
 
@@ -213,5 +236,6 @@ export {
     content,
     close,
     markdownContainer,
+    header,
     banner
 }
