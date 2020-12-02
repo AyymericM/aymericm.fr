@@ -15,8 +15,6 @@ export default class ProjectContent extends Component {
     }
 
     componentDidUpdate() {
-        console.log("ID: ", this.project.id, "is active: ", this.props.active)
-
         if (this.props.active != this.state.showContent) {
             if (this.props.active) {
                 setTimeout(() => {

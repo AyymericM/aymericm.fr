@@ -153,7 +153,7 @@ const markdownContainer = styled.div`
     & p {
         font-weight: 300;
         font-size: 18px;
-        line-height: 24px;
+        line-height: 32px;
         margin: 0 0 24px 0;
         width: 100%;
     }
