@@ -1,4 +1,4 @@
-import { MainConsummer, MainProvider } from './MainStore'
+import MainProvider, { MainConsummer } from './MainStore'
 
 export {
     MainConsummer,

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import { ProjectContent } from 'components'
 import { MainConsummer } from 'stores'
 import { projects } from 'styles'
 import { API_URL } from 'config'
 
-export default class ProjectItem extends Component {
+class ProjectItem extends Component {
     constructor() {
         super()
 
@@ -19,6 +20,7 @@ export default class ProjectItem extends Component {
     }
 
     refreshRef() {
+        console.log('refresh ref')
         if ((this.ref.current.getBoundingClientRect().left + this.ref.current.getBoundingClientRect().top) > 0 && this.ref.current != null) {
             this.setState({
                 top: window.scrollY + this.ref.current.getBoundingClientRect().top,
@@ -36,15 +38,15 @@ export default class ProjectItem extends Component {
     render() {
         return (
             <MainConsummer>
-                {({state, actions}) => (
+                {({ state }) => (
                     <projects.container
                         ref={this.ref}
                         thumbnail={`${API_URL}${this.props.data.project.thumbnail.url}`}
                         onClick={() => {
                             if (!this.props.active || !state.ui.projects.expandActive) {
                                 this.refreshRef()
+                                this.props.history.push(`/projects/${this.props.data.hash}`)
                             }
-                            actions.setActiveProject(this.props.index)
                         }}
                         active={this.props.active}
                         expand={this.props.active && state.ui.projects.expandActive}
@@ -60,7 +62,10 @@ export default class ProjectItem extends Component {
                             : null}
                             <projects.close
                                 active={this.props.active && state.ui.projects.expandActive}
-                                onClick={() => actions.setActiveProject(-1)}
+                                onClick={() => {
+                                    console.log(this.props.history)
+                                    this.props.history.push(`/projects`)
+                                }}
                             >Close</projects.close>
                             <ProjectContent active={this.props.active && state.ui.projects.expandActive} data={this.props.data}></ProjectContent>
                         </projects.content>
@@ -70,3 +75,5 @@ export default class ProjectItem extends Component {
         )
     }
 }
+
+export default withRouter(ProjectItem)

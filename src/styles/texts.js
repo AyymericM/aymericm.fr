@@ -113,7 +113,6 @@ const loadScreen = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: opacity 500ms ease-out;
     font-size: 72px;
     cursor: default;
     user-select: none;

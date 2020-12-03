@@ -1,17 +1,19 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { withRouter, matchPath } from 'react-router-dom'
 import * as cfg from 'config'
 
 const MainContext = React.createContext('Main')
 const MainConsummer = MainContext.Consumer
 
-export default class MainProvider extends Component {
+class MainProvider extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
             ui: {
                 willBeLoaded: false,
+                firstLoad: true,
                 loaded: false,
                 projects: {
                     hideMozaic: false,
@@ -27,18 +29,47 @@ export default class MainProvider extends Component {
             setActiveProject: this.setActiveProject.bind(this)
         }
     }
+    
+    checkForParams() {
+        const match = matchPath(this.props.history.location.pathname, {
+            path: '/projects/:slug',
+            exact: true,
+            strict: false
+        })
+
+        if (match) {
+            if(match.params.slug) {
+                this.setActiveProject(match.params.slug)
+            } else {
+                this.setActiveProject(-1)
+            }
+        } else {
+            this.setActiveProject(-1)
+        }
+    }
 
     componentDidMount() {
         this.getDataFromApi()
+        this.checkForParams()
+
+        console.log('first load: ', this.state.ui.firstLoad)
+
+        this.props.history.listen(() => {          
+            console.log('first load: ', this.state.ui.firstLoad)
+
+            this.checkForParams()
+        })
     }
 
     showUi() {
         this.setState({
             ui: {
                 ...this.state.ui,
-                willBeLoaded: true
+                willBeLoaded: true,
+                firstLoad: this.state.ui.projects.activeProject == -1 ? false : true
             }
         })
+
         setTimeout(() => {
             this.setState({
                 ui: {
@@ -60,7 +91,7 @@ export default class MainProvider extends Component {
 
             this.showUi()
             
-            console.log('api data', this.state)
+            console.log('online')
         }).catch(e => {
             this.setState({
                 error: true,
@@ -68,7 +99,7 @@ export default class MainProvider extends Component {
             })
             
             this.showUi()
-            console.log('backup data', this.state)
+            console.log('offline')
         })
     }
 
@@ -78,9 +109,10 @@ export default class MainProvider extends Component {
                 this.setState({
                     ui: {
                         ...this.state.ui,
+                        firstLoad: false,
                         projects: {
                             ...this.state.ui.projects,
-                            expandActive: false
+                            expandActive: false,
                         }
                     }
                 })
@@ -133,7 +165,8 @@ export default class MainProvider extends Component {
     }
 }
 
+export default withRouter(MainProvider)
+
 export {
-    MainConsummer,
-    MainProvider
+    MainConsummer
 }

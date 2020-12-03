@@ -8,7 +8,6 @@ const GlobalStyles = createGlobalStyle`
         font-familly: "Avenir Next LT Pro";
         src: url(${AvenirNextLTPro}) format('truetype');
     }
-    @import url('https://fonts.googleapis.com/css?family=Cutive+Mono');
     
     * {
         list-style: none;
