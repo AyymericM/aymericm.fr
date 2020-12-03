@@ -29,6 +29,18 @@ class MainProvider extends Component {
             setActiveProject: this.setActiveProject.bind(this)
         }
     }
+
+    containsProject(hash) {
+        for (let i = 0; i < this.state.data.projects.length; i++) {
+            const element = this.state.data.projects[i]
+
+            if (element.hash == hash) {
+                return true
+            }
+        }
+
+        return false
+    }
     
     checkForParams() {
         const match = matchPath(this.props.history.location.pathname, {
@@ -39,7 +51,12 @@ class MainProvider extends Component {
 
         if (match) {
             if(match.params.slug) {
-                this.setActiveProject(match.params.slug)
+                if (this.containsProject(match.params.slug)) {
+                    this.setActiveProject(match.params.slug)
+                } else {
+                    this.setActiveProject(-1)
+                    this.props.history.push('/projects')
+                }
             } else {
                 this.setActiveProject(-1)
             }
@@ -50,13 +67,8 @@ class MainProvider extends Component {
 
     componentDidMount() {
         this.getDataFromApi()
-        this.checkForParams()
 
-        console.log('first load: ', this.state.ui.firstLoad)
-
-        this.props.history.listen(() => {          
-            console.log('first load: ', this.state.ui.firstLoad)
-
+        this.props.history.listen(() => {
             this.checkForParams()
         })
     }
@@ -89,6 +101,7 @@ class MainProvider extends Component {
                 data: res.data
             })
 
+            this.checkForParams()
             this.showUi()
             
             console.log('online')
@@ -98,6 +111,7 @@ class MainProvider extends Component {
                 data: cfg.home
             })
             
+            this.checkForParams()
             this.showUi()
             console.log('offline')
         })

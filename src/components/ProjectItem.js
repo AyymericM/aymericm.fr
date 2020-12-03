@@ -20,7 +20,6 @@ class ProjectItem extends Component {
     }
 
     refreshRef() {
-        console.log('refresh ref')
         if ((this.ref.current.getBoundingClientRect().left + this.ref.current.getBoundingClientRect().top) > 0 && this.ref.current != null) {
             this.setState({
                 top: window.scrollY + this.ref.current.getBoundingClientRect().top,
@@ -62,10 +61,7 @@ class ProjectItem extends Component {
                             : null}
                             <projects.close
                                 active={this.props.active && state.ui.projects.expandActive}
-                                onClick={() => {
-                                    console.log(this.props.history)
-                                    this.props.history.push(`/projects`)
-                                }}
+                                onClick={() => this.props.history.push(`/projects`)}
                             >Close</projects.close>
                             <ProjectContent active={this.props.active && state.ui.projects.expandActive} data={this.props.data}></ProjectContent>
                         </projects.content>

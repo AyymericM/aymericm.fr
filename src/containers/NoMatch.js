@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
-import { home as h, texts as t } from 'styles'
-import { HomeLink } from 'components'
+import { Redirect } from 'react-router-dom'
 
 export default class NoMatch extends Component {
 	render() {
 		return (
-			<h.container>
-				<t.main>{'404'}</t.main>
-			</h.container>
+			<Redirect to={"/"} />
 		)
 	}
 }
