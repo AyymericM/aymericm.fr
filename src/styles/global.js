@@ -1,12 +1,15 @@
 import { createGlobalStyle } from 'styled-components'
 import { colors } from './constants'
-import AvenirNextLTPro from '../assets/fonts/AvenirNextLTPro-Demi.otf'
+import AvenirNextLTProWoff from 'assets/AvenirNextLTPro-Demi.woff'
+import AvenirNextLTProWoff2 from 'assets/AvenirNextLTPro-Demi.woff2'
 
 /* eslint no-unused-expressions: 0 */
 const GlobalStyles = createGlobalStyle`
     @font-face {
-        font-familly: "Avenir Next LT Pro";
-        src: url(${AvenirNextLTPro}) format('truetype');
+        font-family: "Avenir Next LT Pro";
+        src: local('Avenir Next LT Pro'), local('AvenirNextLTPro'),
+        url(${AvenirNextLTProWoff}) format('woff'),
+        url(${AvenirNextLTProWoff2}) format('woff2');
     }
     
     * {
