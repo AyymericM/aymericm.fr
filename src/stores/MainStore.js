@@ -138,13 +138,24 @@ class MainProvider extends Component {
                             ...this.state.ui,
                             projects: {
                                 ...this.state.ui.projects,
-                                activeProject: i,
                                 expandActive: false,
+                                
+                            }
+                        }
+                    })
+                }, 1050);
+                setTimeout(() => {
+                    this.setState({
+                        ui: {
+                            ...this.state.ui,
+                            projects: {
+                                ...this.state.ui.projects,
+                                activeProject: i,
                                 hideMozaic: false
                             }
                         }
                     })
-                }, 1600);
+                }, 1400);
             } else {
                 if (!this.state.ui.projects.expandActive) {     
                     this.setState({
