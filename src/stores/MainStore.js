@@ -18,6 +18,7 @@ class MainProvider extends Component {
                 projects: {
                     hideMozaic: false,
                     expandActive: false,
+                    showContent: false,
                     activeProject: -1
                 }
             },
@@ -28,6 +29,14 @@ class MainProvider extends Component {
         this.actions = {
             setActiveProject: this.setActiveProject.bind(this)
         }
+    }
+
+    componentDidMount() {
+        this.getDataFromApi()
+
+        this.props.history.listen(() => {
+            this.checkForParams()
+        })
     }
 
     containsProject(hash) {
@@ -65,14 +74,6 @@ class MainProvider extends Component {
         }
     }
 
-    componentDidMount() {
-        this.getDataFromApi()
-
-        this.props.history.listen(() => {
-            this.checkForParams()
-        })
-    }
-
     showUi() {
         this.setState({
             ui: {
@@ -95,7 +96,7 @@ class MainProvider extends Component {
     getDataFromApi() {
         // TODO: make images lazy load
 
-        axios.get(`${cfg.API_URL}/data`).then(res => {
+        axios.get(`${window.env.API_URL}/data`).then(res => {
             this.setState({
                 error: false,
                 data: res.data
@@ -105,6 +106,7 @@ class MainProvider extends Component {
             this.showUi()
             
             console.log('online')
+            console.log(this.state)
         }).catch(e => {
             this.setState({
                 error: true,
@@ -126,7 +128,7 @@ class MainProvider extends Component {
                         firstLoad: false,
                         projects: {
                             ...this.state.ui.projects,
-                            expandActive: false,
+                            showContent: false,
                         }
                     }
                 })
@@ -137,11 +139,12 @@ class MainProvider extends Component {
                             projects: {
                                 ...this.state.ui.projects,
                                 activeProject: i,
+                                expandActive: false,
                                 hideMozaic: false
                             }
                         }
                     })
-                }, 325);
+                }, 1600);
             } else {
                 if (!this.state.ui.projects.expandActive) {     
                     this.setState({
@@ -165,6 +168,17 @@ class MainProvider extends Component {
                             }
                         })
                     }, 450);
+                    setTimeout(() => {
+                        this.setState({
+                            ui: {
+                                ...this.state.ui,
+                                projects: {
+                                    ...this.state.ui.projects,
+                                    showContent: true
+                                }
+                            }
+                        })
+                    }, 1200);
                 }
             }
         }

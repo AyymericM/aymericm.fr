@@ -98,7 +98,8 @@ const content = styled.div`
     width: 100%;
     z-index: 100;
     background: white;
-    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition-delay: 600ms;
     opacity: 0;
     z-index: -1;
     ${props => props.active && css`
@@ -152,7 +153,7 @@ const markdownContainer = styled.div`
     background-color: white;
     position: relative;
     & * {
-        transition: all 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transition: all 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
         transform: translateY(50px);
         opacity: 0;
         cursor: pointer;

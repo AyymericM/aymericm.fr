@@ -1,5 +1,3 @@
-const API_URL = 'http://localhost:1337' // useless
-
 const home = {
     links: {
         mail: 'mailto:contact@aymericm.fr',
@@ -15,6 +13,5 @@ const home = {
 }
 
 export {
-    API_URL,
     home
 }

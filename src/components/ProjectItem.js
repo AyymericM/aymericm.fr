@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom'
 import { ProjectContent } from 'components'
 import { MainConsummer } from 'stores'
 import { projects } from 'styles'
-import { API_URL } from 'config'
 
 class ProjectItem extends Component {
     constructor() {
@@ -40,7 +39,7 @@ class ProjectItem extends Component {
                 {({ state }) => (
                     <projects.container
                         ref={this.ref}
-                        thumbnail={`${API_URL}${this.props.data.project.thumbnail.url}`}
+                        thumbnail={`${window.env.API_URL}${this.props.data.project.thumbnail.url}`}
                         onClick={() => {
                             if (!this.props.active || !state.ui.projects.expandActive) {
                                 this.refreshRef()
@@ -55,15 +54,15 @@ class ProjectItem extends Component {
                         willRedirect={this.props.willRedirect}
                         pos={this.state}
                     >
-                        <projects.content active={this.props.active && state.ui.projects.expandActive}>
+                        <projects.content active={this.props.active && state.ui.projects.expandActive && state.ui.projects.showContent}>
                             {this.props.data.project.banner ?
-                                <projects.banner source={`${API_URL}${this.props.data.project.banner.url}`}></projects.banner>
+                                <projects.banner source={`${window.env.API_URL}${this.props.data.project.banner.url}`}></projects.banner>
                             : null}
                             <projects.close
                                 active={this.props.active && state.ui.projects.expandActive}
                                 onClick={() => this.props.history.push(`/projects`)}
                             >Close</projects.close>
-                            <ProjectContent active={this.props.active && state.ui.projects.expandActive} data={this.props.data}></ProjectContent>
+                            <ProjectContent active={this.props.active && state.ui.projects.expandActive} showContent={this.props.active && state.ui.projects.expandActive && state.ui.projects.showContent} data={this.props.data}></ProjectContent>
                         </projects.content>
                     </projects.container>
                 )}
