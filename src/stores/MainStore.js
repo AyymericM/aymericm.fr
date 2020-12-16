@@ -121,7 +121,7 @@ class MainProvider extends Component {
 
     setActiveProject(i) {
         if (i !== this.state.ui.projects.activeProject) {
-            if (i == -1) {
+            if (i == -1) { // No project selected
                 this.setState({
                     ui: {
                         ...this.state.ui,
@@ -156,8 +156,8 @@ class MainProvider extends Component {
                         }
                     })
                 }, 1400);
-            } else {
-                if (!this.state.ui.projects.expandActive) {     
+            } else { // Project selected
+                if (!this.state.ui.projects.expandActive) {
                     this.setState({
                         ui: {
                             ...this.state.ui,

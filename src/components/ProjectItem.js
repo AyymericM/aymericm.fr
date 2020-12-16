@@ -45,6 +45,9 @@ class ProjectItem extends Component {
                                 this.refreshRef()
                                 this.props.history.push(`/projects/${this.props.data.hash}`)
                             }
+                            setTimeout(() => {
+                                window.scrollTo({top: 0, behavior: 'smooth'});
+                            }, 600)
                         }}
                         active={this.props.active}
                         expand={this.props.active && state.ui.projects.expandActive}
@@ -60,7 +63,12 @@ class ProjectItem extends Component {
                             : null}
                             <projects.close
                                 active={this.props.active && state.ui.projects.expandActive}
-                                onClick={() => this.props.history.push(`/projects`)}
+                                onClick={() => {
+                                    this.props.history.push(`/projects`)
+                                    setTimeout(() => {
+                                        window.scrollTo({top: this.state.relTop, behavior: 'smooth'});
+                                    }, 1000)
+                                }}
                             >Close</projects.close>
                             <ProjectContent active={this.props.active && state.ui.projects.expandActive} showContent={this.props.active && state.ui.projects.expandActive && state.ui.projects.showContent} data={this.props.data}></ProjectContent>
                         </projects.content>

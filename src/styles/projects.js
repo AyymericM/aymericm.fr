@@ -82,8 +82,8 @@ const container = styled.div`
     ${props => props.expand && css`
         width: 100vw;
         min-height: 100vh;
-        left: ${props => props.pos.relLeft}px;
-        top: ${props => props.pos.relTop}px;
+        left: 0px;
+        top: 0px;
         margin: 0;
     `}
     ${props => props.disable && css`
