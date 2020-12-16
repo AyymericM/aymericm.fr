@@ -1,10 +1,21 @@
 import styled, { keyframes, css } from 'styled-components'
-import { colors } from './constants'
+import { colors, sizes } from './constants'
 
 const fadeIn = keyframes`
     from {
         opacity: 0;
-        transform: translateY(150px);
+        transform: translateY(75px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+`
+
+const fadeInMobile = keyframes`
+    from {
+        opacity: 0;
+        transform: translateY(10vw);
     }
     to {
         opacity: 1;
@@ -22,7 +33,21 @@ const fadeOut = keyframes`
     }
     to {
         opacity: 0;
-        transform: translateY(-150px);
+        transform: translateY(-75px);
+    }
+`
+
+const fadeOutMobile = keyframes`
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    50% {
+        opacity: 0;
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-5vw);
     }
 `
 
@@ -33,6 +58,12 @@ const wrapper = styled.div`
     flex-wrap: wrap;
     margin: 60px 90px;
     overflow: hidden;
+    @media ${sizes.isSmallerThanDesktop} {
+        margin: 0 60px;
+    }
+    @media ${sizes.isMobile} {
+        margin: 20px 22px;
+    }
 `
 
 const container = styled.div`
@@ -42,7 +73,7 @@ const container = styled.div`
     background-color: white;
     margin: 10px 10px 0 0;
     opacity: 0;
-    transform: translateY(150px) scale(1);
+    transform: translateY(75px) scale(1);
     transform-origin: center;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     animation-name: ${fadeIn};
@@ -54,6 +85,17 @@ const container = styled.div`
     background-image: url(${props => props.thumbnail});
     background-size: cover;
     background-position: center;
+    @media ${sizes.isMobile} {
+        width: calc(100vw - 44px);
+        height: 30vh;
+        margin: 0;
+        transform: translateY(10vw);
+        animation-name: ${fadeInMobile};
+    }
+    @media ${sizes.isTablet} {
+        width: calc(50% - 10px);
+        height: 300px;
+    }
     ${props => props.willRedirect && css`
         opacity: 1;
         transform: translateY(0);
@@ -63,6 +105,10 @@ const container = styled.div`
         animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
         animation-iteration-count: 1;
         animation-fill-mode: forwards;
+        @media ${sizes.isMobile} {
+            transform: translateY(0) !important;
+            animation-name: ${fadeOutMobile} !important;
+        }
     `}
     ${props => props.hide && css`
         opacity: 1;
@@ -73,6 +119,10 @@ const container = styled.div`
         animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
         animation-iteration-count: 1;
         animation-fill-mode: forwards;
+        @media ${sizes.isMobile} {
+            transform: translateY(0) !important;
+            animation-name: ${fadeOutMobile} !important;
+        }
     `}
     ${props => props.active && css`
         position: absolute;
@@ -80,8 +130,8 @@ const container = styled.div`
         top: ${props => props.pos.top}px;
     `}
     ${props => props.expand && css`
-        width: 100vw;
-        min-height: 100vh;
+        width: 100vw !important;
+        min-height: 100vh !important;
         left: 0px;
         top: 0px;
         margin: 0;
@@ -120,6 +170,11 @@ const close = styled.span`
     font-size: 24px;
     color: ${colors.blue};
     cursor: pointer;
+    @media ${sizes.isMobile} {
+        font-size: 14px;
+        right: 22px;
+        top: 20px;
+    }
     ${props => props.active && css`
         opacity: 1;
     `}
@@ -133,7 +188,7 @@ const header = styled.div`
     align-items: center;
     width: 100%;
     margin: 0 0 30px 0;
-    margin-bottom: 120px !important;
+    margin-bottom: 80px !important;
     &::before {
         content: '';
         position: absolute;
@@ -144,6 +199,11 @@ const header = styled.div`
         width: calc(100% + 160px);
         background: ${colors.black};
         opacity: 0.1;
+        @media ${sizes.isMobile} {
+            left: 0;
+            width: 100%;
+            bottom: -20px;
+        }
     }
 `
 
@@ -157,6 +217,9 @@ const markdownContainer = styled.div`
         transform: translateY(65px);
         opacity: 0;
         cursor: pointer;
+        @media ${sizes.isMobile} {
+            transform: translateY(5vw);
+        }
     }
     & img {
         width: 100%;
@@ -168,6 +231,10 @@ const markdownContainer = styled.div`
         font-size: 56px;
         line-height: 60px;
         margin: 0 0 30px 0;
+        @media ${sizes.isMobile} {
+            font-size: 24px;
+            line-height: 40px;
+        }
     }
     & h2 {
         font-size: 42px;
@@ -210,6 +277,10 @@ const markdownContainer = styled.div`
             opacity: 1;
         }
     `}
+    @media ${sizes.isMobile} {
+        padding: 60px 22px 0 22px;
+        box-sizing: border-box;
+    }
 `
 
 const banner = styled.div`

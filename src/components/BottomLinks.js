@@ -21,7 +21,7 @@ export default class BottomLinks extends Component {
         return (
             <MainConsummer>
 				{({state}) => (
-                    <home.bottomLinks visible={this.state.visible && !this.props.willRedirect}>
+                    <home.bottomLinks visible={this.state.visible && state.ui.projects.activeProject === -1}>
                         <texts.blueLink target={'_blank'} href={state.data.links.mail}>my email</texts.blueLink>
                         <texts.blueLink target={'_blank'} href={state.data.links.resumee}>my resume</texts.blueLink>
                     </home.bottomLinks>

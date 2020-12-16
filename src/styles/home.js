@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { sizes } from './constants'
 
 const container = styled.div`
     padding: 90px 0 0 90px;
@@ -10,6 +11,25 @@ const container = styled.div`
     justify-content: flex-start;
     align-items: flex-start;
     overflow: hidden;
+    @media ${sizes.isSmallerThanDesktop} {
+        padding: 60px 0 30px 60px;
+    }
+    @media ${sizes.isTablet} {
+        padding: 60px;
+    }
+    @media ${sizes.isMobile} {
+        ${props => !props.isHome && css`
+            padding: 75px 22px 0 22px;
+        `}
+        ${props => props.isHome && css`
+            padding: 20px 22px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-start;
+        `}
+    }
 `
 
 const bottomLinks = styled.div`
@@ -31,6 +51,17 @@ const bottomLinks = styled.div`
     ${props => props.visible && css`
         opacity: 1;
     `}
+    @media ${sizes.isMobile} {
+        top: 20px;
+        left: 22px;
+        bottom: auto;
+        right: auto;
+        & > a {
+            margin-left: 0;
+            margin-right: 20px;
+            font-size: 14px;
+        }
+    }
 `
 
 export {

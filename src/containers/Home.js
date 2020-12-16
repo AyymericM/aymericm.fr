@@ -63,7 +63,7 @@ export default class Home extends Component {
                             <React.Fragment>
                                 {this.state.redirect ? <Redirect to={this.state.redirectURL} />: null}
                             </React.Fragment>
-                            <h.container>
+                            <h.container isHome={true}>
                                 {state.data.text.map((text, i) => {
                                     if (text.match(this.regs.reg_url)) {
                                         const data = this.parseText(text)
