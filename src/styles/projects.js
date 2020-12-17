@@ -73,7 +73,7 @@ const container = styled.div`
     background-color: white;
     margin: 10px 10px 0 0;
     opacity: 0;
-    transform: translateY(75px) scale(1);
+    transform: translateY(75px);
     transform-origin: center;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     animation-name: ${fadeIn};
@@ -96,21 +96,26 @@ const container = styled.div`
         width: calc(50% - 10px);
         height: 300px;
     }
-    ${props => props.willRedirect && css`
-        opacity: 1;
-        transform: translateY(0);
-        animation-name: ${fadeOut};
-        animation-delay: ${props => props.delay / 2}ms;
-        animation-duration: 450ms;
+    ${props => (!props.pos.init) && css`
+        opacity: 0;
+        transform: translateY(75px);
+        transform-origin: center;
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        animation-name: ${fadeIn};
+        animation-delay: ${props => props.delay}ms;
+        animation-duration: 600ms;
         animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
         animation-iteration-count: 1;
         animation-fill-mode: forwards;
+        background-image: url(${props => props.thumbnail});
+        background-size: cover;
+        background-position: center;
         @media ${sizes.isMobile} {
-            transform: translateY(0) !important;
-            animation-name: ${fadeOutMobile} !important;
+            transform: translateY(10vw) !important;
+            animation-name: ${fadeInMobile} !important;
         }
     `}
-    ${props => props.hide && css`
+    ${props => (props.hide || props.willRedirect) && css`
         opacity: 1;
         transform: translateY(0);
         animation-name: ${fadeOut};
@@ -124,12 +129,12 @@ const container = styled.div`
             animation-name: ${fadeOutMobile} !important;
         }
     `}
-    ${props => props.active && css`
+    ${props => (props.active && props.pos.init) && css`
         position: absolute;
         left: ${props => props.pos.left}px;
         top: ${props => props.pos.top}px;
     `}
-    ${props => props.expand && css`
+    ${props => (props.expand && props.pos.init) && css`
         width: 100vw !important;
         min-height: 100vh !important;
         left: 0px;
@@ -302,6 +307,24 @@ const banner = styled.div`
     }
 `
 
+const loader = styled.div`
+    position: absolute;
+    z-index: 5000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url(${props => props.thumbnail});
+    background-size: cover;
+    background-position: center;
+    opacity: 1;
+    transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    pointer-events: none;
+    ${props => props.showContent && css`
+        opacity: 0;
+    `}
+`
+
 export {
     wrapper,
     container,
@@ -309,5 +332,6 @@ export {
     close,
     markdownContainer,
     header,
-    banner
+    banner,
+    loader
 }

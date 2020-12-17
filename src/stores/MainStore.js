@@ -19,7 +19,14 @@ class MainProvider extends Component {
                     hideMozaic: false,
                     expandActive: false,
                     showContent: false,
-                    activeProject: -1
+                    activeProject: -1,
+                    elPos: {
+                        init: false,
+                        top: 0,
+                        left: 0,
+                        relTop: 0,
+                        relLeft: 0
+                    }
                 }
             },
             error: false,
@@ -27,7 +34,8 @@ class MainProvider extends Component {
         }
 
         this.actions = {
-            setActiveProject: this.setActiveProject.bind(this)
+            setActiveProject: this.setActiveProject.bind(this),
+            refreshRef: this.refreshRef.bind(this)
         }
     }
 
@@ -37,6 +45,26 @@ class MainProvider extends Component {
         this.props.history.listen(() => {
             this.checkForParams()
         })
+
+        console.log(this.state.data)
+    }
+
+    refreshRef(pos) {
+        console.log('POS DATA: ', pos)
+        this.setState({
+            ui: {
+                ...this.state.ui,
+                projects: {
+                    ...this.state.ui.projects,
+                    elPos: {
+                        ...pos,
+                        init: true
+                    }
+                }
+            }
+        })
+
+        console.log('EL POS (RR):', this.state.ui.projects.elPos)
     }
 
     containsProject(hash) {
@@ -106,7 +134,6 @@ class MainProvider extends Component {
             this.showUi()
             
             console.log('online')
-            console.log(this.state)
         }).catch(e => {
             this.setState({
                 error: true,
@@ -126,6 +153,7 @@ class MainProvider extends Component {
                     ui: {
                         ...this.state.ui,
                         firstLoad: false,
+                        activeProjectData: {},
                         projects: {
                             ...this.state.ui.projects,
                             showContent: false,
@@ -133,13 +161,15 @@ class MainProvider extends Component {
                     }
                 })
                 setTimeout(() => {
+                    this.props.history.push(`/projects`)
+                }, 500);
+                setTimeout(() => {
                     this.setState({
                         ui: {
                             ...this.state.ui,
                             projects: {
                                 ...this.state.ui.projects,
                                 expandActive: false,
-                                
                             }
                         }
                     })
@@ -164,7 +194,8 @@ class MainProvider extends Component {
                             projects: {
                                 ...this.state.ui.projects,
                                 hideMozaic: true,
-                                activeProject: i
+                                activeProject: i,
+                                activeProjectData: this.state.data.projects.filter(project => project.hash == i)[0]
                             }
                         }
                     })
@@ -180,6 +211,7 @@ class MainProvider extends Component {
                         })
                     }, 450);
                     setTimeout(() => {
+                        this.props.history.push(`/projects/${i}`)
                         this.setState({
                             ui: {
                                 ...this.state.ui,
@@ -193,6 +225,7 @@ class MainProvider extends Component {
                 }
             }
         }
+        console.log('FIRST LOAD:', this.state.ui.firstLoad)
     }
 
     render() {

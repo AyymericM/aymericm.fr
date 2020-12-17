@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { projects, texts } from 'styles'
 import ReactMarkdown from "react-markdown"
+import { MainConsummer } from 'stores'
 
 export default class ProjectContent extends Component {
     constructor(props) {
@@ -11,6 +12,8 @@ export default class ProjectContent extends Component {
         this.state = {
             showContent: false
         }
+
+        console.log('PROJECT DATA (PC):', this.project)
     }
 
     componentDidUpdate() {
@@ -27,15 +30,18 @@ export default class ProjectContent extends Component {
 
     render() {
         return (
-            <projects.markdownContainer active={this.props.active} showContent={this.state.showContent} useMargin={this.project.banner}>
-                <projects.header>
-                    <texts.projectTitle>{this.project.name}</texts.projectTitle>
-                    {this.project.projectURL ? 
-                        <texts.blueLink style={{cursor: 'pointer'}} target={'_blank'} href={this.project.projectURL}>Visit site</texts.blueLink>
-                    : null}
-                </projects.header>
-                <ReactMarkdown transformImageUri={uri => `${window.env.API_URL}${uri}`} source={this.project.content}/>
-            </projects.markdownContainer>
+            <React.Fragment>
+                <projects.loader thumbnail={`${window.env.API_URL}${this.project.thumbnail.url}`} showContent={this.state.showContent}></projects.loader>
+                <projects.markdownContainer active={this.props.active} showContent={this.state.showContent} useMargin={this.project.banner}>
+                    <projects.header>
+                        <texts.projectTitle>{this.project.name}</texts.projectTitle>
+                        {this.project.projectURL ? 
+                            <texts.blueLink style={{cursor: 'pointer'}} target={'_blank'} href={this.project.projectURL}>Visit site</texts.blueLink>
+                        : null}
+                    </projects.header>
+                    <ReactMarkdown transformImageUri={uri => `${window.env.API_URL}${uri}`} source={this.project.content}/>
+                </projects.markdownContainer>
+            </React.Fragment>
         )
     }
 }

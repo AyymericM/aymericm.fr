@@ -32,11 +32,9 @@ class Projects extends Component {
                         <t.loadScreen willBeLoaded={state.ui.willBeLoaded}>Loading :)</t.loadScreen>
                     :
                         <React.Fragment>
-                            {state.ui.firstLoad && state.ui.projects.activeProject != -1 ? null :
-                                <h.container>
-                                    <t.main willRedirect={this.state.willRedirect || state.ui.projects.hideMozaic}>Here is my work. You can <br/><a onClick={() => this.redirect('/', state.data.projects.length)}>go back</a> at any time !</t.main>
-                                </h.container>
-                            }
+                            <h.container>
+                                <t.main willRedirect={this.state.willRedirect || state.ui.projects.hideMozaic}>Here is my work. You can <br/><a onClick={() => this.redirect('/', state.data.projects.length)}>go back</a> at any time !</t.main>
+                            </h.container>
                             <p.wrapper>
                                 {state.data.projects.map((project, i) => {
                                     return (

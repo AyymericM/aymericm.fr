@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { MainConsummer } from 'stores'
-import { Home, Projects, NoMatch } from '../containers/index.js'
+import { Home, Projects, ProjectView, NoMatch } from '../containers/index.js'
 
 export default class Routes extends Component {
     render() {
@@ -12,7 +12,8 @@ export default class Routes extends Component {
                         <Route exact path="/" component={Home} />
                         {state.error ? null : 
                             <React.Fragment>
-                                <Route exact={false} strict={false} path="/projects/:slug?" component={Projects} />
+                                <Route exact={true} path="/projects" component={Projects} />
+                                <Route exact={true} path="/projects/:slug" component={ProjectView} />
                             </React.Fragment>
                         }
                         <Route component={NoMatch} />

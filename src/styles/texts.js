@@ -166,6 +166,8 @@ const loadScreen = styled.div`
     font-size: 72px;
     cursor: default;
     user-select: none;
+    opacity: 1;
+    transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     ${props => !props.willBeLoaded && css`
         animation-name: ${loadAnim};
         animation-duration: 1000ms;
@@ -173,6 +175,7 @@ const loadScreen = styled.div`
         animation-iteration-count: infinite;
     `}
     ${props => props.willBeLoaded && css`
+        opacity: 0;
         animation-name: ${loadAnimEnd};
         animation-duration: 600ms;
         animation-timing-function: ease-out;
