@@ -61,12 +61,12 @@ class Home extends Component {
                                         const data = this.parseText(text)
 
                                         if (data.internal) {
-                                            return <t.main willRedirect={this.state.willRedirect} delay={i * 300} key={i}>{data.text_before}<a onClick={() => this.redirect(data.url_link, state.data.text.length + 1)}>{data.url_text}</a>{data.text_after}</t.main> 
+                                            return <t.main willRedirect={this.state.willRedirect} delay={i * 100} key={i}>{data.text_before}<a onClick={() => this.redirect(data.url_link, state.data.text.length + 1)}>{data.url_text}</a>{data.text_after}</t.main> 
                                         } else {
-                                            return <t.main willRedirect={this.state.willRedirect} delay={i * 300} key={i}>{data.text_before}<a target={'blank'} href={data.url_link}>{data.url_text}</a>{data.text_after}</t.main>
+                                            return <t.main willRedirect={this.state.willRedirect} delay={i * 100} key={i}>{data.text_before}<a target={'blank'} href={data.url_link}>{data.url_text}</a>{data.text_after}</t.main>
                                         }
                                     } else {
-                                        return <t.main willRedirect={this.state.willRedirect} delay={i * 300} key={i}>{text}</t.main>
+                                        return <t.main willRedirect={this.state.willRedirect} delay={i * 100} key={i}>{text}</t.main>
                                     }
                                 })}
                             </h.container>

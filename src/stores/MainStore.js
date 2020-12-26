@@ -20,7 +20,7 @@ class MainProvider extends Component {
                     showContent: false,
                     activeProject: -1,
                     showLoader: false,
-                    activeProjectData: {},
+                    activeProjectData: -1,
                     elPos: {
                         init: false,
                         top: 0,
@@ -98,7 +98,7 @@ class MainProvider extends Component {
                     canInteract: true
                 }
             })
-        }, 400)
+        }, 800)
     }
 
     getDataFromApi() {
@@ -163,7 +163,7 @@ class MainProvider extends Component {
                             }
                         }
                     })
-                }, 1100);
+                }, 1500);
                 setTimeout(() => {
                     this.setState({
                         ui: {
@@ -173,11 +173,11 @@ class MainProvider extends Component {
                                 ...this.state.ui.projects,
                                 activeProject: -1,
                                 hideMozaic: false,
-                                activeProjectData: {}
+                                activeProjectData: -1
                             }
                         }
                     })
-                }, 1600);
+                }, 2000);
                 console.log('1')
             } else { // Project selected
                 this.setState({
@@ -196,7 +196,6 @@ class MainProvider extends Component {
                     this.setState({
                         ui: {
                             ...this.state.ui,
-                            activeProjectData: {},
                             projects: {
                                 ...this.state.ui.projects,
                                 showLoader: true,
@@ -211,14 +210,13 @@ class MainProvider extends Component {
                     this.setState({
                         ui: {
                             ...this.state.ui,
-                            activeProjectData: {},
                             projects: {
                                 ...this.state.ui.projects,
                                 showLoader: false,
                             }
                         }
                     })
-                }, 1100);
+                }, 1500);
                 setTimeout(() => {
                     this.setState({
                         ui: {
@@ -230,7 +228,7 @@ class MainProvider extends Component {
                             }
                         }
                     })
-                }, 1400);
+                }, 1500);
                 console.log('2')
             }
         }

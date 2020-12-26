@@ -255,27 +255,6 @@ const banner = styled.div`
     }
 `
 
-const loadAnimEnd = keyframes`
-    from {
-        opacity: 1;
-        transform: skew(0, 0);
-    }
-
-    25% {
-        opacity: 1;
-        transform: skew(-20deg, 0);
-    }
-
-    75% {
-        opacity: 1;  
-    }
-
-    to {
-        opacity: 0;
-        transform: skew(-20deg, 0);
-    }
-`
-
 const loader = styled.div`
     position: absolute;
     z-index: 1000;
@@ -295,16 +274,15 @@ const loader = styled.div`
     pointer-events: none;
     background: white;
     opacity: 0;
-    transition: opacity 450ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: skew(0, 0);
     ${props => props.showLoader && css`
         opacity: 1;
+        transform: skew(0, 0);
     `}
     ${props => !props.showLoader && css`
-        animation-name: ${loadAnimEnd};
-        animation-duration: 400ms;
-        animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        animation-iteration-count: 1;
-        animation-fill-mode: forwards;
+        opacity: 0;
+        transform: skew(-20deg, 0);
     `}
 `
 

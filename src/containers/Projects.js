@@ -15,12 +15,12 @@ class Projects extends Component {
         this.redirect = this.redirect.bind(this)
     }
 
-    redirect(redirect, length = 1) {
+    redirect(redirect, length = 3) {
         this.setState({ willRedirect: true })
 
         setTimeout(() => {
             this.props.history.push(redirect)
-        }, length * 100)
+        }, length * 150 + 100)
     }
 
 	render() {
@@ -33,7 +33,7 @@ class Projects extends Component {
                         <React.Fragment>
                             <projects.loader showLoader={state.ui.projects.showLoader}>{state.ui.projects.activeProjectData !== {} ? state.ui.projects.activeProjectData.name : null}</projects.loader>
                             <home.container>
-                                <texts.main willRedirect={state.ui.projects.hideMozaic}>Here is my work. You can <a onClick={() => this.redirect('/', state.data.projects.length)}>go back</a> at any time !</texts.main>
+                                <texts.main willRedirect={(state.ui.projects.hideMozaic || this.state.willRedirect)}>Here is my work. You can <a onClick={() => this.redirect('/', state.data.projects.length)}>go back</a> at any time !</texts.main>
                             </home.container>
                             <projects.wrapper>
                                 {state.data.projects.map((project, i) => {
@@ -42,12 +42,12 @@ class Projects extends Component {
                                             key={i}
                                             index={i}
                                             data={project}
-                                            willRedirect={state.ui.projects.hideMozaic}
+                                            willRedirect={(state.ui.projects.hideMozaic || this.state.willRedirect)}
                                         />
                                     )
                                 })}
                             </projects.wrapper>
-                            <BottomLinks willRedirect={state.ui.projects.hideMozaic}/>
+                            <BottomLinks willRedirect={(state.ui.projects.hideMozaic || this.state.willRedirect)}/>
                         </React.Fragment>
 				)}
 			</MainConsummer>
