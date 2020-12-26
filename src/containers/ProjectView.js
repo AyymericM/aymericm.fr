@@ -33,7 +33,7 @@ class ProjectView extends Component {
                     :
                         <React.Fragment>
                             {state.ui.projects.activeProjectData.banner ?
-                                <p.banner source={`${window.env.API_URL}${state.ui.projects.activeProjectData.banner.url}`}></p.banner>
+                                <p.banner source={`${process.env.API_URL}${state.ui.projects.activeProjectData.banner.url}`}></p.banner>
                             : null}
                             <p.close
                                 active={state.ui.projects.showContent && !this.state.willRedirect}

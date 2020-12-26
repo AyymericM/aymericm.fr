@@ -9,7 +9,7 @@ import * as pjson from '../package.json'
 import GlobalStyles from './styles/global'
 
 const tagManagerArgs = {
-    gtmId: window.env.GTM_ID,
+    gtmId: process.env.REACT_APP_GTM_ID,
     dataLayer: {
         version: pjson.version
     }

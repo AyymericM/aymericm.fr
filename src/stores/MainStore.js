@@ -104,7 +104,7 @@ class MainProvider extends Component {
     getDataFromApi() {
         // TODO: make images lazy load
 
-        axios.get(`${window.env.API_URL}/data`).then(res => {
+        axios.get(`${process.env.REACT_APP_API_URL}/data`).then(res => {
             this.setState({
                 error: false,
                 data: res.data
