@@ -13,13 +13,14 @@ class MainProvider extends Component {
         this.state = {
             ui: {
                 willBeLoaded: false,
-                firstLoad: true,
                 loaded: false,
+                canInteract: false,
                 projects: {
                     hideMozaic: false,
-                    expandActive: false,
                     showContent: false,
                     activeProject: -1,
+                    showLoader: false,
+                    activeProjectData: {},
                     elPos: {
                         init: false,
                         top: 0,
@@ -34,37 +35,12 @@ class MainProvider extends Component {
         }
 
         this.actions = {
-            setActiveProject: this.setActiveProject.bind(this),
-            refreshRef: this.refreshRef.bind(this)
+            setActiveProject: this.setActiveProject.bind(this)
         }
     }
 
     componentDidMount() {
         this.getDataFromApi()
-
-        this.props.history.listen(() => {
-            this.checkForParams()
-        })
-
-        console.log(this.state.data)
-    }
-
-    refreshRef(pos) {
-        console.log('POS DATA: ', pos)
-        this.setState({
-            ui: {
-                ...this.state.ui,
-                projects: {
-                    ...this.state.ui.projects,
-                    elPos: {
-                        ...pos,
-                        init: true
-                    }
-                }
-            }
-        })
-
-        console.log('EL POS (RR):', this.state.ui.projects.elPos)
     }
 
     containsProject(hash) {
@@ -90,15 +66,19 @@ class MainProvider extends Component {
             if(match.params.slug) {
                 if (this.containsProject(match.params.slug)) {
                     this.setActiveProject(match.params.slug)
+                    console.log('CFP 1');
                 } else {
                     this.setActiveProject(-1)
                     this.props.history.push('/projects')
+                    console.log('CFP 2');
                 }
             } else {
                 this.setActiveProject(-1)
+                console.log('CFP 3');
             }
         } else {
             this.setActiveProject(-1)
+            console.log('CFP 4');
         }
     }
 
@@ -106,8 +86,7 @@ class MainProvider extends Component {
         this.setState({
             ui: {
                 ...this.state.ui,
-                willBeLoaded: true,
-                firstLoad: this.state.ui.projects.activeProject == -1 ? false : true
+                willBeLoaded: true
             }
         })
 
@@ -115,10 +94,11 @@ class MainProvider extends Component {
             this.setState({
                 ui: {
                     ...this.state.ui,
-                    loaded: true
+                    loaded: true,
+                    canInteract: true
                 }
             })
-        }, 800)
+        }, 400)
     }
 
     getDataFromApi() {
@@ -152,8 +132,7 @@ class MainProvider extends Component {
                 this.setState({
                     ui: {
                         ...this.state.ui,
-                        firstLoad: false,
-                        activeProjectData: {},
+                        canInteract: false,
                         projects: {
                             ...this.state.ui.projects,
                             showContent: false,
@@ -161,71 +140,100 @@ class MainProvider extends Component {
                     }
                 })
                 setTimeout(() => {
-                    this.props.history.push(`/projects`)
-                }, 500);
-                setTimeout(() => {
                     this.setState({
                         ui: {
                             ...this.state.ui,
                             projects: {
                                 ...this.state.ui.projects,
-                                expandActive: false,
+                                showLoader: true,
                             }
                         }
                     })
-                }, 1050);
+                }, 500);
+                setTimeout(() => {
+                    this.props.history.push(`/projects`)
+                }, 800);
                 setTimeout(() => {
                     this.setState({
                         ui: {
                             ...this.state.ui,
                             projects: {
                                 ...this.state.ui.projects,
-                                activeProject: i,
-                                hideMozaic: false
+                                showLoader: false,
+                            }
+                        }
+                    })
+                }, 1100);
+                setTimeout(() => {
+                    this.setState({
+                        ui: {
+                            ...this.state.ui,
+                            canInteract: true,
+                            projects: {
+                                ...this.state.ui.projects,
+                                activeProject: -1,
+                                hideMozaic: false,
+                                activeProjectData: {}
+                            }
+                        }
+                    })
+                }, 1600);
+                console.log('1')
+            } else { // Project selected
+                this.setState({
+                    ui: {
+                        ...this.state.ui,
+                        canInteract: false,
+                        projects: {
+                            ...this.state.ui.projects,
+                            hideMozaic: true,
+                            activeProject: i,
+                            activeProjectData: this.state.data.projects.filter(project => project.hash == i)[0]
+                        }
+                    }
+                })
+                setTimeout(() => {
+                    this.setState({
+                        ui: {
+                            ...this.state.ui,
+                            activeProjectData: {},
+                            projects: {
+                                ...this.state.ui.projects,
+                                showLoader: true,
+                            }
+                        }
+                    })
+                }, 500);
+                setTimeout(() => {
+                    this.props.history.push(`/projects/${i}`)
+                }, 800);
+                setTimeout(() => {
+                    this.setState({
+                        ui: {
+                            ...this.state.ui,
+                            activeProjectData: {},
+                            projects: {
+                                ...this.state.ui.projects,
+                                showLoader: false,
+                            }
+                        }
+                    })
+                }, 1100);
+                setTimeout(() => {
+                    this.setState({
+                        ui: {
+                            ...this.state.ui,
+                            canInteract: true,
+                            projects: {
+                                ...this.state.ui.projects,
+                                showContent: true
                             }
                         }
                     })
                 }, 1400);
-            } else { // Project selected
-                if (!this.state.ui.projects.expandActive) {
-                    this.setState({
-                        ui: {
-                            ...this.state.ui,
-                            projects: {
-                                ...this.state.ui.projects,
-                                hideMozaic: true,
-                                activeProject: i,
-                                activeProjectData: this.state.data.projects.filter(project => project.hash == i)[0]
-                            }
-                        }
-                    })
-                    setTimeout(() => {
-                        this.setState({
-                            ui: {
-                                ...this.state.ui,
-                                projects: {
-                                    ...this.state.ui.projects,
-                                    expandActive: true
-                                }
-                            }
-                        })
-                    }, 450);
-                    setTimeout(() => {
-                        this.props.history.push(`/projects/${i}`)
-                        this.setState({
-                            ui: {
-                                ...this.state.ui,
-                                projects: {
-                                    ...this.state.ui.projects,
-                                    showContent: true
-                                }
-                            }
-                        })
-                    }, 1200);
-                }
+                console.log('2')
             }
         }
-        console.log('FIRST LOAD:', this.state.ui.firstLoad)
     }
 
     render() {

@@ -96,25 +96,6 @@ const container = styled.div`
         width: calc(50% - 10px);
         height: 300px;
     }
-    ${props => (!props.pos.init) && css`
-        opacity: 0;
-        transform: translateY(75px);
-        transform-origin: center;
-        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        animation-name: ${fadeIn};
-        animation-delay: ${props => props.delay}ms;
-        animation-duration: 600ms;
-        animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        animation-iteration-count: 1;
-        animation-fill-mode: forwards;
-        background-image: url(${props => props.thumbnail});
-        background-size: cover;
-        background-position: center;
-        @media ${sizes.isMobile} {
-            transform: translateY(10vw) !important;
-            animation-name: ${fadeInMobile} !important;
-        }
-    `}
     ${props => (props.hide || props.willRedirect) && css`
         opacity: 1;
         transform: translateY(0);
@@ -128,39 +109,6 @@ const container = styled.div`
             transform: translateY(0) !important;
             animation-name: ${fadeOutMobile} !important;
         }
-    `}
-    ${props => (props.active && props.pos.init) && css`
-        position: absolute;
-        left: ${props => props.pos.left}px;
-        top: ${props => props.pos.top}px;
-    `}
-    ${props => (props.expand && props.pos.init) && css`
-        width: 100vw !important;
-        min-height: 100vh !important;
-        left: 0px;
-        top: 0px;
-        margin: 0;
-    `}
-    ${props => props.disable && css`
-        display: none;
-    `}
-`
-
-const content = styled.div`
-    position: absolute;
-    cursor: pointer;
-    height: 100%;
-    width: 100%;
-    z-index: 100;
-    background: white;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    transition-delay: 400ms;
-    opacity: 0;
-    z-index: -1;
-    ${props => props.active && css`
-        cursor: default;
-        opacity: 1;
-        z-index: 100;
     `}
 `
 
@@ -307,28 +255,62 @@ const banner = styled.div`
     }
 `
 
+const loadAnimEnd = keyframes`
+    from {
+        opacity: 1;
+        transform: skew(0, 0);
+    }
+
+    25% {
+        opacity: 1;
+        transform: skew(-20deg, 0);
+    }
+
+    75% {
+        opacity: 1;  
+    }
+
+    to {
+        opacity: 0;
+        transform: skew(-20deg, 0);
+    }
+`
+
 const loader = styled.div`
     position: absolute;
-    z-index: 5000;
-    left: 0;
-    top: 0;
+    z-index: 1000;
     width: 100vw;
     height: 100vh;
-    background-image: url(${props => props.thumbnail});
-    background-size: cover;
-    background-position: center;
-    opacity: 1;
-    transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 72px;
+    cursor: default;
+    user-select: none;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: ${colors.blue};
+    color: transparent;
+    text-transform: uppercase;
     pointer-events: none;
-    ${props => props.showContent && css`
-        opacity: 0;
+    background: white;
+    opacity: 0;
+    transition: opacity 450ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    ${props => props.showLoader && css`
+        opacity: 1;
+    `}
+    ${props => !props.showLoader && css`
+        animation-name: ${loadAnimEnd};
+        animation-duration: 400ms;
+        animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
     `}
 `
 
 export {
     wrapper,
     container,
-    content,
     close,
     markdownContainer,
     header,

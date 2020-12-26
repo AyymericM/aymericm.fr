@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { home as h, texts as t, projects as p } from '../styles'
+import { home, texts, projects } from '../styles'
 import { withRouter } from 'react-router-dom'
 import { BottomLinks, ProjectItem } from 'components'
 import { MainConsummer } from 'stores'
@@ -9,7 +9,6 @@ class Projects extends Component {
         super()
 
         this.state = {
-            activeProject: -1,
             willRedirect: false
         }
 
@@ -27,28 +26,28 @@ class Projects extends Component {
 	render() {
 		return (
 			<MainConsummer>
-				{({state, actions}) => (
+				{({state}) => (
                     !state.ui.loaded ?
-                        <t.loadScreen willBeLoaded={state.ui.willBeLoaded}>Loading :)</t.loadScreen>
+                        <texts.loadScreen willBeLoaded={state.ui.willBeLoaded}>Loading :)</texts.loadScreen>
                     :
                         <React.Fragment>
-                            <h.container>
-                                <t.main willRedirect={this.state.willRedirect || state.ui.projects.hideMozaic}>Here is my work. You can <br/><a onClick={() => this.redirect('/', state.data.projects.length)}>go back</a> at any time !</t.main>
-                            </h.container>
-                            <p.wrapper>
+                            <projects.loader showLoader={state.ui.projects.showLoader}>{state.ui.projects.activeProjectData !== {} ? state.ui.projects.activeProjectData.name : null}</projects.loader>
+                            <home.container>
+                                <texts.main willRedirect={state.ui.projects.hideMozaic}>Here is my work. You can <a onClick={() => this.redirect('/', state.data.projects.length)}>go back</a> at any time !</texts.main>
+                            </home.container>
+                            <projects.wrapper>
                                 {state.data.projects.map((project, i) => {
                                     return (
                                         <ProjectItem
                                             key={i}
                                             index={i}
                                             data={project}
-                                            active={state.ui.projects.activeProject === project.hash ? true : false}
-                                            willRedirect={this.state.willRedirect}
+                                            willRedirect={state.ui.projects.hideMozaic}
                                         />
                                     )
                                 })}
-                            </p.wrapper>
-                            <BottomLinks/>
+                            </projects.wrapper>
+                            <BottomLinks willRedirect={state.ui.projects.hideMozaic}/>
                         </React.Fragment>
 				)}
 			</MainConsummer>

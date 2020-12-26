@@ -60,6 +60,7 @@ const textBase = `
     margin: 10px 0;
     cursor: default;
     text-align: left;
+    will-change: transform;
 `
 
 const blueLink = styled.a`
@@ -95,7 +96,6 @@ const main = styled.p`
         opacity: 1;
         transform: translateY(0);
         animation-name: ${fadeOut};
-        animation-delay: ${props => props.delay / 2}ms;
         animation-duration: 450ms;
         animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
         animation-iteration-count: 1;
@@ -167,7 +167,11 @@ const loadScreen = styled.div`
     cursor: default;
     user-select: none;
     opacity: 1;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: ${colors.blue};
     transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    color: transparent;
+    text-transform: uppercase;
     ${props => !props.willBeLoaded && css`
         animation-name: ${loadAnim};
         animation-duration: 1000ms;
@@ -177,7 +181,7 @@ const loadScreen = styled.div`
     ${props => props.willBeLoaded && css`
         opacity: 0;
         animation-name: ${loadAnimEnd};
-        animation-duration: 600ms;
+        animation-duration: 400ms;
         animation-timing-function: ease-out;
         animation-iteration-count: 1;
         animation-fill-mode: forwards;

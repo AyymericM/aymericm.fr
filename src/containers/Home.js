@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
 import { home as h, texts as t } from 'styles'
-import { Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { BottomLinks } from 'components'
 import { MainConsummer } from 'stores'
 
-export default class Home extends Component {
+class Home extends Component {
     constructor() {
         super()
 
         this.state = {
-            willRedirect: false,
-            redirect: false,
-            redirectURL: '/projects'
+            willRedirect: false
         }
 
         this.regs = {
@@ -45,11 +43,8 @@ export default class Home extends Component {
         this.setState({ willRedirect: true })
 
         setTimeout(() => {
-            this.setState({
-                redirect: true,
-                redirectURL: redirect
-            })
-        }, length * 150)
+            this.props.history.push(redirect)
+        }, length * 100)
     }
 
 	render() {
@@ -60,16 +55,13 @@ export default class Home extends Component {
                         <t.loadScreen willBeLoaded={state.ui.willBeLoaded}>Loading :)</t.loadScreen>
                     :
                         <React.Fragment>
-                            <React.Fragment>
-                                {this.state.redirect ? <Redirect to={this.state.redirectURL} />: null}
-                            </React.Fragment>
                             <h.container isHome={true}>
                                 {state.data.text.map((text, i) => {
                                     if (text.match(this.regs.reg_url)) {
                                         const data = this.parseText(text)
 
                                         if (data.internal) {
-                                            return <t.main willRedirect={this.state.willRedirect} delay={i * 300} key={i}>{data.text_before}<a onClick={() => this.redirect(data.url_link, state.data.text.length)}>{data.url_text}</a>{data.text_after}</t.main> 
+                                            return <t.main willRedirect={this.state.willRedirect} delay={i * 300} key={i}>{data.text_before}<a onClick={() => this.redirect(data.url_link, state.data.text.length + 1)}>{data.url_text}</a>{data.text_after}</t.main> 
                                         } else {
                                             return <t.main willRedirect={this.state.willRedirect} delay={i * 300} key={i}>{data.text_before}<a target={'blank'} href={data.url_link}>{data.url_text}</a>{data.text_after}</t.main>
                                         }
@@ -86,5 +78,4 @@ export default class Home extends Component {
 	}
 }
 
-
-
+export default withRouter(Home)

@@ -36,23 +36,18 @@ class ProjectView extends Component {
                         <t.loadScreen willBeLoaded={state.ui.willBeLoaded}>Loading :)</t.loadScreen>
                     :
                         <React.Fragment>
-                            {/* {state.ui.firstLoad && state.ui.projects.activeProject != -1 ? null :
-                                <h.container>
-                                    <t.main willRedirect={this.state.willRedirect || state.ui.projects.hideMozaic}>Here is my work. You can <br/><a onClick={() => this.redirect('/', state.data.projects.length)}>go back</a> at any time !</t.main>
-                                </h.container>
-                            } TO ACTIVATE FOR ROUTE CHECK/REDIRECTS */}
-                            <p.content active={true}>
-                                {state.ui.projects.activeProjectData.banner ?
-                                    <p.banner source={`${window.env.API_URL}${state.ui.projects.activeProjectData.banner.url}`}></p.banner>
-                                : null}
-                                <p.close
-                                    active={true}
-                                    onClick={() => {
+                            {state.ui.projects.activeProjectData.banner ?
+                                <p.banner source={`${window.env.API_URL}${state.ui.projects.activeProjectData.banner.url}`}></p.banner>
+                            : null}
+                            <p.close
+                                active={state.ui.projects.showContent && !this.state.willRedirect}
+                                onClick={() => {
+                                    if (state.ui.canInteract) {
                                         actions.setActiveProject(-1)
-                                    }}
-                                >Close</p.close>
-                                <ProjectContent active={state.ui.projects.expandActive} showContent={state.ui.projects.expandActive && state.ui.projects.showContent} data={state.ui.projects.activeProjectData}></ProjectContent>
-                            </p.content>
+                                    }
+                                }}
+                            >Close</p.close>
+                            <ProjectContent showContent={state.ui.projects.showContent} data={state.ui.projects.activeProjectData}></ProjectContent>
                         </React.Fragment>
 				)}
 			</MainConsummer>

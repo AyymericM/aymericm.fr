@@ -1,7 +1,15 @@
 import React, { Component } from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import { MainConsummer } from 'stores'
 import { Home, Projects, ProjectView, NoMatch } from '../containers/index.js'
+
+const CustomRoute = props => {
+    if (!props.apiError) {
+        return <Route {...props} />
+    } else {
+        return <Redirect to='/' />
+    }
+ }
 
 export default class Routes extends Component {
     render() {
@@ -10,12 +18,8 @@ export default class Routes extends Component {
 				{({state}) => (
                     <Switch>
                         <Route exact path="/" component={Home} />
-                        {state.error ? null : 
-                            <React.Fragment>
-                                <Route exact={true} path="/projects" component={Projects} />
-                                <Route exact={true} path="/projects/:slug" component={ProjectView} />
-                            </React.Fragment>
-                        }
+                        <CustomRoute exact={true} path="/projects" component={Projects} apiError={state.error} />
+                        <CustomRoute exact={true} path="/projects/:slug" component={ProjectView} apiError={state.error} />
                         <Route component={NoMatch} />
                     </Switch>
                 )}
