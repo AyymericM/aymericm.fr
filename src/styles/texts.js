@@ -130,31 +130,7 @@ const projectTitle = styled.h1`
     -webkit-text-stroke-color: ${colors.black};
 `
 
-const loadAnim = keyframes`
-    from {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.5;
-    }
-
-    to {
-        opacity: 1;
-    }
-`
-
-const loadAnimEnd = keyframes`
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
-    }
-`
-
-const loadScreen = styled.div`
+const loadBase = css`
     position: absolute;
     z-index: 1000;
     width: 100vw;
@@ -166,31 +142,56 @@ const loadScreen = styled.div`
     font-size: 72px;
     cursor: default;
     user-select: none;
-    opacity: 1;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: ${colors.blue};
-    transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     color: transparent;
     text-transform: uppercase;
+    pointer-events: none;
+    background: white;
+    opacity: 0;
+    transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: skew(0, 0);
+    text-align: center;
+`
+
+const loadScreen = styled.div`
+    ${loadBase}
     ${props => !props.willBeLoaded && css`
-        animation-name: ${loadAnim};
-        animation-duration: 1000ms;
-        animation-timing-function: ease;
-        animation-iteration-count: infinite;
+        opacity: 1;
+        transform: skew(0, 0);
     `}
     ${props => props.willBeLoaded && css`
         opacity: 0;
-        animation-name: ${loadAnimEnd};
-        animation-duration: 400ms;
-        animation-timing-function: ease-out;
-        animation-iteration-count: 1;
-        animation-fill-mode: forwards;
+        transform: skew(-20deg, 0);
     `}
+    @media ${sizes.isMobile} {
+        padding: 0 22px;
+        box-sizing: border-box;
+        font-size: 54px;
+    }
+`
+
+const projectLoader = styled.div`
+    ${loadBase}
+    ${props => props.showLoader && css`
+        opacity: 1;
+        transform: skew(0, 0);
+    `}
+    ${props => !props.showLoader && css`
+        opacity: 0;
+        transform: skew(-20deg, 0);
+    `}
+    @media ${sizes.isMobile} {
+        padding: 0 22px;
+        box-sizing: border-box;
+        font-size: 54px;
+    }
 `
 
 export {
     main,
     blueLink,
     projectTitle,
-    loadScreen
+    loadScreen,
+    projectLoader
 }

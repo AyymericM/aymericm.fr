@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { ProjectContent } from 'components'
 import { MainConsummer } from 'stores'
 import { projects } from 'styles'
 

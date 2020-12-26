@@ -24,10 +24,6 @@ class ProjectView extends Component {
         }, length * 100)
     }
 
-    componentDidMount() {
-        // console.log('PROJECTVIEW')
-    }
-
 	render() {
 		return (
 			<MainConsummer>

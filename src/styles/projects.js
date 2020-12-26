@@ -113,7 +113,7 @@ const container = styled.div`
 `
 
 const close = styled.span`
-    position: fixed;
+    position: absolute;
     z-index: 200;
     right: 35px;
     top: 25px;
@@ -162,14 +162,12 @@ const header = styled.div`
 
 const markdownContainer = styled.div`
     max-width: 1100px;
-    cursor: pointer;
     background-color: white;
     position: relative;
     & * {
         transition: all 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
         transform: translateY(65px);
         opacity: 0;
-        cursor: pointer;
         @media ${sizes.isMobile} {
             transform: translateY(5vw);
         }
@@ -218,12 +216,6 @@ const markdownContainer = styled.div`
         margin: 140px auto;
         padding: 60px 80px;
     `}
-    ${props => props.active && css`
-        cursor: default;
-        & * {
-            cursor: default;
-        }
-    `}
     ${props => props.showContent && css`
         & * {
             transform: translateY(0);
@@ -255,43 +247,11 @@ const banner = styled.div`
     }
 `
 
-const loader = styled.div`
-    position: absolute;
-    z-index: 1000;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 72px;
-    cursor: default;
-    user-select: none;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: ${colors.blue};
-    color: transparent;
-    text-transform: uppercase;
-    pointer-events: none;
-    background: white;
-    opacity: 0;
-    transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    transform: skew(0, 0);
-    ${props => props.showLoader && css`
-        opacity: 1;
-        transform: skew(0, 0);
-    `}
-    ${props => !props.showLoader && css`
-        opacity: 0;
-        transform: skew(-20deg, 0);
-    `}
-`
-
 export {
     wrapper,
     container,
     close,
     markdownContainer,
     header,
-    banner,
-    loader
+    banner
 }

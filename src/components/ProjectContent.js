@@ -31,7 +31,7 @@ export default class ProjectContent extends Component {
             <MainConsummer>
                 {({state}) => (
                     <React.Fragment>
-                        <projects.loader showLoader={state.ui.projects.showLoader}>{this.props.data.name}</projects.loader>
+                        <texts.projectLoader showLoader={state.ui.projects.showLoader}>{this.props.data.name}</texts.projectLoader>
                         <projects.markdownContainer showContent={this.state.showContent} useMargin={this.project.banner}>
                             <projects.header>
                                 <texts.projectTitle>{this.project.name}</texts.projectTitle>

@@ -98,7 +98,7 @@ class MainProvider extends Component {
                     canInteract: true
                 }
             })
-        }, 800)
+        }, 500)
     }
 
     getDataFromApi() {

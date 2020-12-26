@@ -31,7 +31,7 @@ class Projects extends Component {
                         <texts.loadScreen willBeLoaded={state.ui.willBeLoaded}>Loading :)</texts.loadScreen>
                     :
                         <React.Fragment>
-                            <projects.loader showLoader={state.ui.projects.showLoader}>{state.ui.projects.activeProjectData !== {} ? state.ui.projects.activeProjectData.name : null}</projects.loader>
+                            <texts.projectLoader showLoader={state.ui.projects.showLoader}>{state.ui.projects.activeProjectData !== {} ? state.ui.projects.activeProjectData.name : null}</texts.projectLoader>
                             <home.container>
                                 <texts.main willRedirect={(state.ui.projects.hideMozaic || this.state.willRedirect)}>Here is my work. You can <a onClick={() => this.redirect('/', state.data.projects.length)}>go back</a> at any time !</texts.main>
                             </home.container>
