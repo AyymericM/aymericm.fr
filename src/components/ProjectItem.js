@@ -14,7 +14,7 @@ class ProjectItem extends Component {
                 {({ state, actions }) => (
                     <projects.container
                         ref={this.ref}
-                        thumbnail={`${process.env.API_URL}${this.props.data.project.thumbnail.url}`}
+                        thumbnail={`${process.env.REACT_APP_API_URL}${this.props.data.project.thumbnail.url}`}
                         onClick={() =>{
                             if (state.ui.canInteract) {
                                 actions.setActiveProject(this.props.data.hash)

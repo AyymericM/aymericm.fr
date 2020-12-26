@@ -39,7 +39,7 @@ export default class ProjectContent extends Component {
                                     <texts.blueLink style={{cursor: 'pointer'}} target={'_blank'} href={this.project.projectURL}>Visit site</texts.blueLink>
                                 : null}
                             </projects.header>
-                            <ReactMarkdown transformImageUri={uri => `${process.env.API_URL}${uri}`} source={this.project.content}/>
+                            <ReactMarkdown transformImageUri={uri => `${process.env.REACT_APP_API_URL}${uri}`} source={this.project.content}/>
                         </projects.markdownContainer>
                     </React.Fragment>
                 )}
