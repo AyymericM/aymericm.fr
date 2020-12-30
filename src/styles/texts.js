@@ -8,7 +8,9 @@ const textBase = `
     margin: 10px 0;
     cursor: default;
     text-align: left;
-    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility:    hidden;
+    -ms-backface-visibility:     hidden;
 `
 
 const blueLink = styled.a`

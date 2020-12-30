@@ -14,6 +14,8 @@ const GlobalStyles = createGlobalStyle`
     
     * {
         list-style: none;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 
     html, body {

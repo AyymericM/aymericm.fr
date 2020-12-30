@@ -201,7 +201,7 @@ const banner = styled.div`
         width: 100%;
         height: 100%;
         background-color: black;
-        opacity: 0.80;
+        opacity: 0.16;
     }
     ${props => props.showContent && css`
         opacity: 1;
