@@ -47,7 +47,7 @@ class Projects extends Component {
                                     )
                                 })}
                             </projects.wrapper>
-                            <BottomLinks willRedirect={(state.ui.projects.hideMozaic || this.state.willRedirect)}/>
+                            <BottomLinks/>
                         </React.Fragment>
 				)}
 			</MainConsummer>

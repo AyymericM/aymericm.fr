@@ -70,7 +70,7 @@ class Home extends Component {
                                     }
                                 })}
                             </h.container>
-                            <BottomLinks willRedirect={this.state.willRedirect}/>
+                            <BottomLinks/>
                         </React.Fragment>
 				)}
 			</MainConsummer>

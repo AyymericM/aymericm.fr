@@ -1,55 +1,7 @@
 import styled, { keyframes, css } from 'styled-components'
-import { colors, sizes } from './constants'
+import { colors, sizes, animations } from './constants'
 
-const fadeIn = keyframes`
-    from {
-        opacity: 0;
-        transform: translateY(75px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-`
 
-const fadeInMobile = keyframes`
-    from {
-        opacity: 0;
-        transform: translateY(10vw);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-`
-
-const fadeOut = keyframes`
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    50% {
-        opacity: 0;
-    }
-    to {
-        opacity: 0;
-        transform: translateY(-75px);
-    }
-`
-
-const fadeOutMobile = keyframes`
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    50% {
-        opacity: 0;
-    }
-    to {
-        opacity: 0;
-        transform: translateY(-5vw);
-    }
-`
 
 const wrapper = styled.div`
     display: flex;
@@ -76,7 +28,7 @@ const container = styled.div`
     transform: translateY(75px);
     transform-origin: center;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    animation-name: ${fadeIn};
+    animation-name: ${animations.fadeIn};
     animation-delay: ${props => props.hide ? 0 : props.delay}ms;
     animation-duration: 600ms;
     animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -88,9 +40,9 @@ const container = styled.div`
     @media ${sizes.isMobile} {
         width: calc(100vw - 44px);
         height: 30vh;
-        margin: 0;
+        margin: 10px 0;
         transform: translateY(10vw);
-        animation-name: ${fadeInMobile};
+        animation-name: ${animations.fadeInMobile};
     }
     @media ${sizes.isTablet} {
         width: calc(50% - 10px);
@@ -99,7 +51,7 @@ const container = styled.div`
     ${props => (props.hide || props.willRedirect) && css`
         opacity: 1;
         transform: translateY(0);
-        animation-name: ${fadeOut};
+        animation-name: ${animations.fadeOut};
         animation-delay: 0;
         animation-duration: 450ms;
         animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -107,13 +59,13 @@ const container = styled.div`
         animation-fill-mode: forwards;
         @media ${sizes.isMobile} {
             transform: translateY(0) !important;
-            animation-name: ${fadeOutMobile} !important;
+            animation-name: ${animations.fadeOutMobile} !important;
         }
     `}
 `
 
 const close = styled.span`
-    position: absolute;
+    position: fixed;
     z-index: 200;
     right: 35px;
     top: 25px;
@@ -164,13 +116,20 @@ const markdownContainer = styled.div`
     max-width: 1100px;
     background-color: white;
     position: relative;
+    transition: all 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateY(65px);
+    opacity: 0;
+    ${props => props.isClosing && css`
+        transition-delay: 150ms;
+    `}
+    @media ${sizes.isMobile} {
+        transform: translateY(10vw);
+        padding: 60px 22px 0 22px;
+        box-sizing: border-box;
+        margin: 0 !important;
+    }
     & * {
-        transition: all 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        transform: translateY(65px);
-        opacity: 0;
-        @media ${sizes.isMobile} {
-            transform: translateY(5vw);
-        }
+        overflow: hidden !important;
     }
     & img {
         width: 100%;
@@ -217,15 +176,9 @@ const markdownContainer = styled.div`
         padding: 60px 80px;
     `}
     ${props => props.showContent && css`
-        & * {
-            transform: translateY(0);
-            opacity: 1;
-        }
+        transform: translateY(0) !important;
+        opacity: 1 !important;
     `}
-    @media ${sizes.isMobile} {
-        padding: 60px 22px 0 22px;
-        box-sizing: border-box;
-    }
 `
 
 const banner = styled.div`
@@ -237,6 +190,11 @@ const banner = styled.div`
     background-image: url(${props => props.source});
     background-size: cover;
     background-position: center;
+    transition: opacity 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    ${props => !props.isClosing && css`
+        transition-delay: 550ms;
+    `}
+    opacity: 0;
     &::before {
         content: '';
         position: absolute;
@@ -244,6 +202,12 @@ const banner = styled.div`
         height: 100%;
         background-color: black;
         opacity: 0.80;
+    }
+    ${props => props.showContent && css`
+        opacity: 1;
+    `}
+    @media ${sizes.isMobile} {
+        display: none !important;
     }
 `
 

@@ -1,57 +1,5 @@
 import styled, { keyframes, css } from 'styled-components'
-import { colors, sizes } from './constants'
-
-
-
-const fadeIn = keyframes`
-    from {
-        opacity: 0;
-        transform: translateY(75px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-`
-
-const fadeInMobile = keyframes`
-    from {
-        opacity: 0;
-        transform: translateY(10vw);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-`
-
-const fadeOut = keyframes`
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    50% {
-        opacity: 0;
-    }
-    to {
-        opacity: 0;
-        transform: translateY(-75px);
-    }
-`
-
-const fadeOutMobile = keyframes`
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    50% {
-        opacity: 0;
-    }
-    to {
-        opacity: 0;
-        transform: translateY(-5vw);
-    }
-`
+import { colors, sizes, animations } from './constants'
 
 const textBase = `
     font-weight: 800;
@@ -77,7 +25,7 @@ const main = styled.p`
     opacity: 0;
     transform: translateY(75px);
     transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    animation-name: ${fadeIn};
+    animation-name: ${animations.fadeIn};
     animation-delay: ${props => props.delay}ms;
     animation-duration: 600ms;
     animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -95,14 +43,14 @@ const main = styled.p`
     ${props => props.willRedirect && css`
         opacity: 1;
         transform: translateY(0);
-        animation-name: ${fadeOut};
+        animation-name: ${animations.fadeOut};
         animation-duration: 450ms;
         animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
         animation-iteration-count: 1;
         animation-fill-mode: forwards;
         @media ${sizes.isMobile} {
             transform: translateY(0) !important;
-            animation-name: ${fadeOutMobile} !important;
+            animation-name: ${animations.fadeOutMobile} !important;
         }
     `}
     @media ${sizes.isSmallerThanDesktop} {
@@ -118,7 +66,7 @@ const main = styled.p`
         line-height: 10vw;
         margin: 5px 0;
         transform: translateY(10vw);
-        animation-name: ${fadeInMobile};
+        animation-name: ${animations.fadeInMobile};
     }
 `
 
@@ -131,10 +79,12 @@ const projectTitle = styled.h1`
 `
 
 const loadBase = css`
-    position: absolute;
+    position: fixed;
     z-index: 1000;
     width: 100vw;
     height: 100vh;
+    top: 0;
+    left: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -152,6 +102,12 @@ const loadBase = css`
     transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
     transform: skew(0, 0);
     text-align: center;
+    overflow: hidden;
+    @media ${sizes.isMobile} {
+        padding: 0 22px;
+        box-sizing: border-box;
+        font-size: 32px;
+    }
 `
 
 const loadScreen = styled.div`
@@ -164,11 +120,6 @@ const loadScreen = styled.div`
         opacity: 0;
         transform: skew(-20deg, 0);
     `}
-    @media ${sizes.isMobile} {
-        padding: 0 22px;
-        box-sizing: border-box;
-        font-size: 54px;
-    }
 `
 
 const projectLoader = styled.div`
@@ -181,11 +132,6 @@ const projectLoader = styled.div`
         opacity: 0;
         transform: skew(-20deg, 0);
     `}
-    @media ${sizes.isMobile} {
-        padding: 0 22px;
-        box-sizing: border-box;
-        font-size: 54px;
-    }
 `
 
 export {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { projects, texts } from 'styles'
+import { BottomLinks } from 'components'
 import ReactMarkdown from "react-markdown"
 import { MainConsummer } from 'stores'
 
@@ -10,7 +11,8 @@ export default class ProjectContent extends Component {
         this.project = this.props.data.project
 
         this.state = {
-            showContent: false
+            showContent: false,
+            isClosing: false
         }
     }
 
@@ -20,10 +22,17 @@ export default class ProjectContent extends Component {
                 setTimeout(() => {
                     this.setState({ showContent: true })
                 }, 600)
+                setTimeout(() => {
+                    this.setState({ isClosing: true })
+                }, 1050)
             } else {
-                this.setState({ showContent: false })
+                this.setState({ showContent: false, isClosing: true })
             }
         }
+    }
+
+    componentDidMount() {
+        console.log(this.project)
     }
 
     render() {
@@ -32,7 +41,10 @@ export default class ProjectContent extends Component {
                 {({state}) => (
                     <React.Fragment>
                         <texts.projectLoader showLoader={state.ui.projects.showLoader}>{this.props.data.name}</texts.projectLoader>
-                        <projects.markdownContainer showContent={this.state.showContent} useMargin={this.project.banner}>
+                        {this.project.banner.url ?
+                            <projects.banner showContent={this.state.showContent} isClosing={this.state.isClosing} source={`${process.env.REACT_APP_API_URL}${this.project.banner.url}`}></projects.banner>
+                        : null}
+                        <projects.markdownContainer showContent={this.state.showContent} isClosing={this.state.isClosing} useMargin={this.project.banner}>
                             <projects.header>
                                 <texts.projectTitle>{this.project.name}</texts.projectTitle>
                                 {this.project.projectURL ? 
@@ -41,6 +53,7 @@ export default class ProjectContent extends Component {
                             </projects.header>
                             <ReactMarkdown transformImageUri={uri => `${process.env.REACT_APP_API_URL}${uri}`} source={this.project.content}/>
                         </projects.markdownContainer>
+                        <BottomLinks/>
                     </React.Fragment>
                 )}
             </MainConsummer>

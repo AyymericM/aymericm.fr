@@ -3,10 +3,6 @@ import { MainConsummer } from 'stores'
 import { home, texts } from 'styles'
 
 export default class BottomLinks extends Component {
-    constructor() {
-        super()
-    }
-
     render() {
         return (
             <MainConsummer>
