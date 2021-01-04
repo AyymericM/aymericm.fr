@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import MetaTags from 'react-meta-tags'
 import { home, texts, projects } from '../styles'
 import { withRouter } from 'react-router-dom'
 import { BottomLinks, ProjectItem } from 'components'
@@ -26,6 +27,18 @@ class Projects extends Component {
 	render() {
 		return (
 			<MainConsummer>
+                <MetaTags>
+                    <title>Aymeric Moehn - Projects</title>
+                    <meta name="description" content="I'm Aymeric Moehn, a creative web developper and freelance based on Paris and there is my work so far !"/>
+
+                    <meta property="og:title" content="Aymeric Moehn - Projects"/>
+                    <meta property="og:description" content="I'm Aymeric Moehn, a creative web developper and freelance based on Paris and there is my work so far !"/>
+                    <meta property="og:image" content="https://aymericm.fr/images/SEO/og-image.png"/>
+
+                    <meta name="twitter:title" content="Aymeric Moehn - Projects"/>
+                    <meta name="twitter:description" content="I'm Aymeric Moehn, a creative web developper and freelance based on Paris and there is my work so far !"/>
+                    <meta name="twitter:image" content="https://aymericm.fr/images/SEO/twitter-image.png"/>
+                </MetaTags>
 				{({state}) => (
                     !state.ui.loaded ?
                         <texts.loadScreen willBeLoaded={state.ui.willBeLoaded}>Loading :)</texts.loadScreen>

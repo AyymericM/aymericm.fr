@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import MetaTags from 'react-meta-tags'
 import { home as h, texts as t } from 'styles'
 import { withRouter } from 'react-router-dom'
 import { BottomLinks } from 'components'
@@ -55,6 +56,18 @@ class Home extends Component {
                         <t.loadScreen willBeLoaded={state.ui.willBeLoaded}>Loading :)</t.loadScreen>
                     :
                         <React.Fragment>
+                            <MetaTags>
+                                <title>Aymeric Moehn - Creative developper and freelance</title>
+                                <meta name="description" content="Hello I'm Aymeric Moehn, a creative web developper and freelance based on Paris !"/>
+
+                                <meta property="og:title" content="Aymeric Moehn - Creative developper and freelance"/>
+                                <meta property="og:description" content="Hello I'm Aymeric Moehn, a creative web developper and freelance based on Paris !"/>
+                                <meta property="og:image" content="https://aymericm.fr/images/SEO/og-image.png"/>
+
+                                <meta name="twitter:title" content="Aymeric Moehn - Creative developper and freelance"/>
+                                <meta name="twitter:description" content="Hello I'm Aymeric Moehn, a creative web developper and freelance based on Paris !"/>
+                                <meta name="twitter:image" content="https://aymericm.fr/images/SEO/twitter-image.png"/>
+                            </MetaTags>
                             <h.container isHome={true}>
                                 {state.data.text.map((text, i) => {
                                     if (text.match(this.regs.reg_url)) {
