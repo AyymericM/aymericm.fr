@@ -44,6 +44,7 @@ class Home extends Component {
         this.setState({ willRedirect: true })
 
         setTimeout(() => {
+            console.log(redirect)
             this.props.history.push(redirect)
         }, length * 100)
     }

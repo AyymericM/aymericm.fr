@@ -26,7 +26,7 @@ class Projects extends Component {
 
 	render() {
 		return (
-			<MainConsummer>
+            <React.Fragment>
                 <MetaTags>
                     <title>Aymeric Moehn - Projects</title>
                     <meta name="description" content="I'm Aymeric Moehn, a creative web developper and freelance based on Paris and there is my work so far !"/>
@@ -39,31 +39,33 @@ class Projects extends Component {
                     <meta name="twitter:description" content="I'm Aymeric Moehn, a creative web developper and freelance based on Paris and there is my work so far !"/>
                     <meta name="twitter:image" content="https://aymericm.fr/images/SEO/twitter-image.png"/>
                 </MetaTags>
-				{({state}) => (
-                    !state.ui.loaded ?
-                        <texts.loadScreen willBeLoaded={state.ui.willBeLoaded}>Loading :)</texts.loadScreen>
-                    :
-                        <React.Fragment>
-                            <texts.projectLoader showLoader={state.ui.projects.showLoader}>{state.ui.projects.activeProjectData !== {} ? state.ui.projects.activeProjectData.name : null}</texts.projectLoader>
-                            <home.container>
-                                <texts.main willRedirect={(state.ui.projects.hideMozaic || this.state.willRedirect)}>Here is my work. You can <a onClick={() => this.redirect('/', state.data.projects.length)}>go back</a> at any time !</texts.main>
-                            </home.container>
-                            <projects.wrapper>
-                                {state.data.projects.map((project, i) => {
-                                    return (
-                                        <ProjectItem
-                                            key={i}
-                                            index={i}
-                                            data={project}
-                                            willRedirect={(state.ui.projects.hideMozaic || this.state.willRedirect)}
-                                        />
-                                    )
-                                })}
-                            </projects.wrapper>
-                            <BottomLinks/>
-                        </React.Fragment>
-				)}
-			</MainConsummer>
+			    <MainConsummer>
+                    {({state}) => (
+                        !state.ui.loaded ?
+                            <texts.loadScreen willBeLoaded={state.ui.willBeLoaded}>Loading :)</texts.loadScreen>
+                        :
+                            <React.Fragment>
+                                <texts.projectLoader showLoader={state.ui.projects.showLoader}>{state.ui.projects.activeProjectData !== {} ? state.ui.projects.activeProjectData.name : null}</texts.projectLoader>
+                                <home.container>
+                                    <texts.main willRedirect={(state.ui.projects.hideMozaic || this.state.willRedirect)}>Here is my work. You can <a onClick={() => this.redirect('/', state.data.projects.length)}>go back</a> at any time !</texts.main>
+                                </home.container>
+                                <projects.wrapper>
+                                    {state.data.projects.map((project, i) => {
+                                        return (
+                                            <ProjectItem
+                                                key={i}
+                                                index={i}
+                                                data={project}
+                                                willRedirect={(state.ui.projects.hideMozaic || this.state.willRedirect)}
+                                            />
+                                        )
+                                    })}
+                                </projects.wrapper>
+                                <BottomLinks/>
+                            </React.Fragment>
+                    )}
+			    </MainConsummer>
+            </React.Fragment>
 		)
 	}
 }

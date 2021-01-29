@@ -28,6 +28,11 @@ const container = styled.div`
             flex-direction: column;
             justify-content: flex-end;
             align-items: flex-start;
+            @supports (-webkit-appearance:none) {
+                & {
+                    height: calc(100vh - 56px);
+                }
+            }
         `}
     }
 `
