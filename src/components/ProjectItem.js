@@ -1,19 +1,34 @@
 import React, { Component } from 'react'
-import { projects } from '../styles'
+import { withRouter } from 'react-router-dom'
+import { MainConsummer } from 'stores'
+import { projects } from 'styles'
 
-export default class ProjectItem extends Component {
+class ProjectItem extends Component {
+    constructor() {
+        super()
+    }
+
     render() {
         return (
-            <projects.itembox>
-                <projects.thumb thumb={this.props.data.thumb}></projects.thumb>
-                <projects.content>
-                    <projects.title>{this.props.data.title}</projects.title>
-                    <projects.text>{this.props.data.description}</projects.text>
-                </projects.content>
-                <projects.link href={this.props.data.url} target={'_blank'}>
-                    Visit project
-                </projects.link>
-            </projects.itembox>
+            <MainConsummer>
+                {({ state, actions }) => (
+                    <projects.container
+                        ref={this.ref}
+                        thumbnail={`${process.env.REACT_APP_API_URL}${this.props.data.project.thumbnail.url}`}
+                        onClick={() =>{
+                            if (state.ui.canInteract) {
+                                actions.setActiveProject(this.props.data.hash)
+                            }
+                        }}
+                        hide={state.ui.projects.hideMozaic}
+                        delay={this.props.index * 100}
+                        willRedirect={this.props.willRedirect}
+                    >
+                    </projects.container>
+                )}
+            </MainConsummer>
         )
     }
 }
+
+export default withRouter(ProjectItem)
