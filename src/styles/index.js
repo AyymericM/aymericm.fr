@@ -1,13 +1,11 @@
+import * as constants from './constants'
 import * as home from './home'
-import * as mainBtn from './mainBtn'
-import * as parallax from './parallax'
-import * as announcement from './announcement'
+import * as texts from './texts'
 import * as projects from './projects'
 
 export {
+    constants,
     home,
-    mainBtn,
-    parallax,
-    announcement,
+    texts,
     projects
 }
