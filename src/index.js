@@ -21,6 +21,10 @@ window.version = () => {
  
 TagManager.initialize(tagManagerArgs)
 
+window.version = () => {
+    console.log(pjson.version)
+}
+
 ReactDOM.render(
     <HashRouter>
         <MainProvider>
