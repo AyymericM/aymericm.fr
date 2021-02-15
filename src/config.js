@@ -2,7 +2,7 @@ const API_URL = 'https://api.aymericm.fr/sitedata/1/'
 
 const links = [
     {
-        url: `https://twitter.com/AyymericM`,
+        url: `https://twitter.com/aymxdd`,
         title: `TW`
     },
     {
